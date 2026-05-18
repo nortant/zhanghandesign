@@ -1,0 +1,170 @@
+﻿---
+---
+
+<section class="how-i-work" id="how-i-work" aria-labelledby="how-heading">
+  <div class="container">
+    <div class="how-i-work__header reveal">
+      <p class="label label-accent">工作方式</p>
+      <h2 class="how-i-work__title" id="how-heading">从设计意图到施工落地</h2>
+      <p class="how-i-work__sub h-en">How I Work</p>
+    </div>
+
+    <ol class="steps" role="list">
+      <li class="step reveal">
+        <div class="step__number" aria-hidden="true">01</div>
+        <div class="step__body">
+          <h3 class="step__title">理解设计意图</h3>
+          <p class="step__desc">深入阅读方案设计图纸与效果图，与方案设计师充分沟通，准确理解设计目标、风格定位与空间关系，确保后续施工图忠实还原设计初衷。</p>
+        </div>
+      </li>
+
+      <li class="step reveal reveal-delay-1">
+        <div class="step__number" aria-hidden="true">02</div>
+        <div class="step__body">
+          <h3 class="step__title">分析施工可行性</h3>
+          <p class="step__desc">结合项目现场条件、地区气候、材料供应与施工工艺，识别方案中可能存在的落地难点，提前制定解决策略，避免施工阶段出现不必要的返工与变更。</p>
+        </div>
+      </li>
+
+      <li class="step reveal reveal-delay-2">
+        <div class="step__number" aria-hidden="true">03</div>
+        <div class="step__body">
+          <h3 class="step__title">转化为施工图</h3>
+          <p class="step__desc">将设计意图转化为规范、完整的施工图纸，包含平面定位、竖向设计、铺装大样、构筑物详图、种植图及水电点位图，确保图纸信息清晰、尺寸准确、可直接用于指导施工。</p>
+        </div>
+      </li>
+
+      <li class="step reveal reveal-delay-3">
+        <div class="step__number" aria-hidden="true">04</div>
+        <div class="step__body">
+          <h3 class="step__title">优化细节与成本</h3>
+          <p class="step__desc">在忠于设计效果的前提下，对材料选型、节点构造与施工工序进行合理优化，在保证品质的同时有效控制建造成本，为项目创造实质性价值。</p>
+        </div>
+      </li>
+
+      <li class="step reveal">
+        <div class="step__number" aria-hidden="true">05</div>
+        <div class="step__body">
+          <h3 class="step__title">支持现场实施</h3>
+          <p class="step__desc">施工过程中持续提供图纸答疑与技术支持，根据现场实际情况出具设计变更说明，确保最终建成效果与设计目标高度一致。</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<style>
+.how-i-work {
+  padding-block: var(--space-section);
+  background: var(--color-bg-alt);
+}
+
+.how-i-work__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-16);
+}
+
+.how-i-work__title {
+  font-family: var(--font-serif-cn);
+  font-size: var(--text-xl);
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: var(--color-ink);
+  line-height: 1.2;
+}
+
+.how-i-work__sub {
+  font-size: var(--text-xs);
+  letter-spacing: 0.2em;
+  color: var(--color-ink-faint);
+  text-transform: uppercase;
+}
+
+.steps {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  counter-reset: step;
+  position: relative;
+}
+
+.steps::before {
+  content: '';
+  position: absolute;
+  left: 2.25rem;
+  top: 1.5rem;
+  bottom: 1.5rem;
+  width: 1px;
+  background: oklch(14% 0.01 60 / 0.1);
+}
+
+.step {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  gap: var(--space-8);
+  padding-block: var(--space-10);
+  position: relative;
+  border-bottom: 1px solid oklch(14% 0.01 60 / 0.07);
+}
+
+.step:last-child {
+  border-bottom: none;
+}
+
+.step__number {
+  font-family: var(--font-serif-en);
+  font-style: italic;
+  font-size: clamp(2rem, 1.5rem + 1.5vw, 3rem);
+  font-weight: 300;
+  color: var(--color-accent);
+  line-height: 1;
+  padding-top: 0.1em;
+  position: relative;
+  z-index: 1;
+}
+
+.step__number::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 2.5rem;
+  height: 2.5rem;
+  background: var(--color-accent-light);
+  border-radius: 50%;
+  z-index: -1;
+  opacity: 0.6;
+}
+
+.step__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding-top: 0.25em;
+}
+
+.step__title {
+  font-family: var(--font-serif-cn);
+  font-size: var(--text-md);
+  font-weight: 400;
+  color: var(--color-ink);
+  letter-spacing: 0.04em;
+}
+
+.step__desc {
+  font-size: var(--text-sm);
+  line-height: 1.9;
+  color: var(--color-ink-muted);
+}
+
+@media (max-width: 640px) {
+  .steps::before { display: none; }
+  .step { grid-template-columns: 3rem 1fr; gap: var(--space-4); padding-block: var(--space-8); }
+  .step__number { font-size: 1.75rem; }
+  .step__number::before { width: 2rem; height: 2rem; }
+}
+</style>

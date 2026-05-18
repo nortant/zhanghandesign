@@ -19,11 +19,11 @@ const currentIndex = sorted.findIndex(p => p.slug === project.slug);
 const prev = currentIndex > 0 ? sorted[currentIndex - 1] : null;
 const next = currentIndex < sorted.length - 1 ? sorted[currentIndex + 1] : null;
 
-const { title, titleEn, category, location, area, year, cover, images, summary } = project.data;
+const { title, titleEn, category, location, role, year, cover, images, summary } = project.data;
 ---
 
 <Layout
-  title={`${title} -- 张涵设计`}
+  title={`${title} — 张涵景观施工图`}
   description={summary}
   image={cover}
 >
@@ -51,7 +51,7 @@ const { title, titleEn, category, location, area, year, cover, images, summary }
 
       <dl class="project-hero__specs reveal reveal-delay-2">
         <div class="spec"><dt class="label">地点</dt><dd class="spec__value">{location}</dd></div>
-        <div class="spec"><dt class="label">面积</dt><dd class="spec__value">{area}</dd></div>
+        <div class="spec"><dt class="label">职责</dt><dd class="spec__value">{role}</dd></div>
         <div class="spec"><dt class="label">年份</dt><dd class="spec__value">{year}</dd></div>
       </dl>
     </div>
@@ -162,3 +162,4 @@ const { title, titleEn, category, location, area, year, cover, images, summary }
 .project-nav__all:hover { color: var(--color-accent); }
 @media (max-width: 640px) { .project-nav__inner { grid-template-columns: 1fr 1fr; gap: var(--space-4); } .project-nav__all { display: none; } .project-nav__item--next { grid-column: 2; } }
 </style>
+

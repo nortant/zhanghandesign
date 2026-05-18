@@ -1,4 +1,4 @@
----
+﻿---
 import Layout from '../../layouts/Layout.astro';
 import ProjectCard from '../../components/ui/ProjectCard.astro';
 import { getCollection } from 'astro:content';
@@ -6,22 +6,22 @@ import { getCollection } from 'astro:content';
 const allProjects = await getCollection('projects');
 const projects = allProjects.sort((a, b) => a.data.order - b.data.order);
 
-const categories = ['全部', '公园绿地', '居住区', '商业景观', '屋顶花园', '滨水景观', '文旅景观', '城市更新'];
+const categories = ['全部', '住宅景观', '社区景观', '酒店景观', '示范区景观', '滨水景观'];
 ---
 
 <Layout
-  title="项目作品 — 张涵设计"
-  description="探索张涵设计的全部景观作品，涵盖公园绿地、居住区、滨水景观、文旅景观等多个类型，服务成渝两地及西南区域。"
+  title="项目案例 — 张涵景观施工图"
+  description="张涵景观施工图项目案例，涵盖住宅景观、社区景观、酒店景观、示范区与滨水景观等多个类型，服务西南地区多个城市。"
 >
   <!-- Page Header -->
   <section class="page-hero">
     <div class="container">
       <div class="page-hero__inner">
         <div class="page-hero__text">
-          <p class="label label-accent reveal">项目作品集</p>
-          <h1 class="h-2xl reveal reveal-delay-1">所有项目</h1>
+          <p class="label label-accent reveal">案例展示</p>
+          <h1 class="h-2xl reveal reveal-delay-1">项目案例</h1>
           <p class="page-hero__subtitle body-lg text-muted reveal reveal-delay-2">
-            跨越十余年的实践，横跨成渝两地，涵盖公园、居住、商业、文旅等多元景观类型。
+            从方案到落地，6个代表性施工图项目，服务四川、新疆等地开发商与设计院。
           </p>
         </div>
         <div class="page-hero__en reveal reveal-delay-1" aria-hidden="true">
@@ -215,3 +215,4 @@ filterBtns.forEach(btn => {
   .page-hero__inner { flex-direction: column; }
 }
 </style>
+

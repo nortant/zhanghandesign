@@ -1,13 +1,13 @@
-import { defineCollection, z } from 'astro:content';
+﻿import { defineCollection, z } from 'astro:content';
 
 const projects = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
     titleEn: z.string(),
-    category: z.enum(['公园绿地', '居住区', '商业景观', '屋顶花园', '滨水景观', '文旅景观', '城市更新']),
+    category: z.enum(['住宅景观', '社区景观', '酒店景观', '示范区景观', '滨水景观']),
     location: z.string(),
-    area: z.string(),
+    role: z.string(),
     year: z.number(),
     cover: z.string(),
     images: z.array(z.string()),
