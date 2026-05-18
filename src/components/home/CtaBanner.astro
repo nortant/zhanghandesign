@@ -1,0 +1,196 @@
+---
+// Dark CTA section at bottom of homepage
+---
+
+<section class="cta" aria-labelledby="cta-heading">
+  <div class="cta__bg">
+    <img
+      src="https://picsum.photos/seed/cta-bg/1920/800"
+      alt=""
+      aria-hidden="true"
+      width="1920"
+      height="800"
+      loading="lazy"
+    />
+    <div class="cta__overlay"></div>
+  </div>
+
+  <div class="cta__inner container">
+    <div class="cta__content reveal">
+      <p class="label" style="color: var(--color-accent)">合作咨询</p>
+      <h2 id="cta-heading" class="cta__heading">
+        开始一个<br>
+        <em class="h-en">new project</em>
+      </h2>
+      <p class="cta__body">无论是公园绿地、居住区景观还是城市更新，我们期待与您探讨如何让这片土地讲述自己的故事。</p>
+      <div class="cta__actions">
+        <a href="/contact" class="cta__btn-primary">联系我们</a>
+        <a href="/projects" class="cta__btn-ghost">浏览作品集</a>
+      </div>
+    </div>
+
+    <div class="cta__info reveal reveal-delay-2">
+      <div class="cta__info-item">
+        <span class="label" style="color: rgba(255,255,255,0.4)">邮件</span>
+        <a href="mailto:hello@zhanghandesign.com" class="cta__contact-link">hello@zhanghandesign.com</a>
+      </div>
+      <div class="cta__info-item">
+        <span class="label" style="color: rgba(255,255,255,0.4)">电话</span>
+        <a href="tel:+861311234xxxx" class="cta__contact-link">+86 · 131 1234 ****</a>
+      </div>
+      <div class="cta__info-item">
+        <span class="label" style="color: rgba(255,255,255,0.4)">工作室</span>
+        <span class="cta__contact-link">成都市高新区天府大道北段</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.cta {
+  position: relative;
+  padding-block: var(--space-section);
+  overflow: hidden;
+}
+
+.cta__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.cta__bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cta__overlay {
+  position: absolute;
+  inset: 0;
+  background: oklch(14% 0.01 60 / 0.88);
+}
+
+.cta__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(3rem, 8vw, 10rem);
+  align-items: center;
+  color: white;
+}
+
+.cta__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.cta__heading {
+  font-family: var(--font-serif-cn);
+  font-size: var(--text-xl);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  line-height: 1.1;
+  color: white;
+}
+
+.cta__heading em {
+  font-family: var(--font-serif-en);
+  font-style: italic;
+  color: var(--color-accent);
+  display: block;
+  font-size: 1.1em;
+}
+
+.cta__body {
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.9;
+  max-width: 40ch;
+}
+
+.cta__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  flex-wrap: wrap;
+  margin-top: var(--space-4);
+}
+
+.cta__btn-primary {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.8em 2em;
+  background-color: var(--color-accent);
+  color: white;
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  border-radius: var(--radius-sm);
+  transition: background-color var(--duration-normal) var(--ease-out-expo),
+              transform var(--duration-normal) var(--ease-out-expo);
+}
+
+.cta__btn-primary:hover {
+  background-color: oklch(36% 0.06 145);
+  transform: translateY(-2px);
+}
+
+.cta__btn-ghost {
+  color: rgba(255, 255, 255, 0.6);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  letter-spacing: 0.06em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  padding-bottom: 2px;
+  transition: color var(--duration-normal), border-color var(--duration-normal);
+}
+
+.cta__btn-ghost:hover {
+  color: white;
+  border-color: white;
+}
+
+/* Right info column */
+.cta__info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding-left: clamp(2rem, 4vw, 5rem);
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cta__info-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.cta__contact-link {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.02em;
+  transition: color var(--duration-normal);
+}
+
+a.cta__contact-link:hover {
+  color: var(--color-accent);
+}
+
+@media (max-width: 900px) {
+  .cta__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .cta__info {
+    padding-left: 0;
+    border-left: none;
+    padding-top: var(--space-8);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+</style>

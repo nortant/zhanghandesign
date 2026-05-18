@@ -1,0 +1,164 @@
+﻿---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map(project => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+
+const allProjects = await getCollection('projects');
+const sorted = allProjects.sort((a, b) => a.data.order - b.data.order);
+const currentIndex = sorted.findIndex(p => p.slug === project.slug);
+const prev = currentIndex > 0 ? sorted[currentIndex - 1] : null;
+const next = currentIndex < sorted.length - 1 ? sorted[currentIndex + 1] : null;
+
+const { title, titleEn, category, location, area, year, cover, images, summary } = project.data;
+---
+
+<Layout
+  title={`${title} -- 张涵设计`}
+  description={summary}
+  image={cover}
+>
+  <section class="project-hero">
+    <div class="project-hero__cover">
+      <img src={cover} alt={title} width="1920" height="1080" fetchpriority="high" loading="eager" />
+      <div class="project-hero__overlay"></div>
+    </div>
+
+    <div class="project-hero__content container">
+      <div class="project-hero__meta reveal">
+        <a href="/projects" class="project-hero__back">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M13 8H3M7 4l-4 4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          所有项目
+        </a>
+        <span class="label label-accent">{category}</span>
+      </div>
+
+      <div class="project-hero__titles reveal reveal-delay-1">
+        <h1 class="project-hero__title-cn">{title}</h1>
+        <p class="project-hero__title-en h-en">{titleEn}</p>
+      </div>
+
+      <dl class="project-hero__specs reveal reveal-delay-2">
+        <div class="spec"><dt class="label">地点</dt><dd class="spec__value">{location}</dd></div>
+        <div class="spec"><dt class="label">面积</dt><dd class="spec__value">{area}</dd></div>
+        <div class="spec"><dt class="label">年份</dt><dd class="spec__value">{year}</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="project-summary">
+    <div class="container project-summary__inner">
+      <div class="project-summary__lead reveal">
+        <p class="project-summary__text">{summary}</p>
+      </div>
+      <div class="project-summary__rule" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <section class="project-content">
+    <div class="container">
+      <div class="project-content__body reveal">
+        <Content />
+      </div>
+    </div>
+  </section>
+
+  {images.length > 0 && (
+    <section class="project-gallery" aria-label="项目图集">
+      <div class="container">
+        <p class="label label-accent reveal" style="margin-bottom: var(--space-8)">项目图集</p>
+        <div class="gallery-grid">
+          {images.map((img, i) => (
+            <div class={`gallery-item ${i === 0 ? 'gallery-item--wide' : ''} reveal`} style={`transition-delay: ${(i % 3) * 80}ms`}>
+              <img src={img} alt={`${title} -- 图 ${i + 1}`} width="1200" height="800" loading="lazy" />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <nav class="project-nav" aria-label="项目导航">
+    <div class="container project-nav__inner">
+      {prev ? (
+        <a href={`/projects/${prev.slug}`} class="project-nav__item project-nav__item--prev">
+          <span class="label">上一个项目</span>
+          <span class="project-nav__title">{prev.data.title}</span>
+        </a>
+      ) : <div />}
+
+      <a href="/projects" class="project-nav__all">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/>
+          <rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/>
+          <rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/>
+          <rect x="14" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+        <span class="sr-only">全部项目</span>
+      </a>
+
+      {next ? (
+        <a href={`/projects/${next.slug}`} class="project-nav__item project-nav__item--next">
+          <span class="label">下一个项目</span>
+          <span class="project-nav__title">{next.data.title}</span>
+        </a>
+      ) : <div />}
+    </div>
+  </nav>
+</Layout>
+
+<style>
+.project-hero { position: relative; height: 80svh; min-height: 520px; display: flex; align-items: flex-end; overflow: hidden; }
+.project-hero__cover { position: absolute; inset: 0; z-index: 0; }
+.project-hero__cover img { width: 100%; height: 100%; object-fit: cover; }
+.project-hero__overlay { position: absolute; inset: 0; background: linear-gradient(to top, oklch(14% 0.01 60 / 0.82) 0%, oklch(14% 0.01 60 / 0.25) 60%, transparent 100%); }
+.project-hero__content { position: relative; z-index: 1; padding-bottom: clamp(2.5rem, 6vw, 5rem); color: white; display: flex; flex-direction: column; gap: var(--space-6); }
+.project-hero__meta { display: flex; align-items: center; gap: var(--space-6); }
+.project-hero__back { display: inline-flex; align-items: center; gap: var(--space-2); font-family: var(--font-sans); font-size: var(--text-xs); letter-spacing: 0.1em; color: rgba(255,255,255,0.6); text-transform: uppercase; transition: color var(--duration-fast); }
+.project-hero__back:hover { color: white; }
+.project-hero__titles { display: flex; flex-direction: column; gap: var(--space-3); }
+.project-hero__title-cn { font-family: var(--font-serif-cn); font-size: var(--text-xl); font-weight: 300; letter-spacing: 0.06em; color: white; line-height: 1.1; }
+.project-hero__title-en { font-size: clamp(1rem, 0.8rem + 1vw, 1.4rem); font-weight: 300; color: rgba(255,255,255,0.5); letter-spacing: 0.04em; }
+.project-hero__specs { display: flex; gap: var(--space-10); flex-wrap: wrap; }
+.spec { display: flex; flex-direction: column; gap: var(--space-2); }
+.spec .label { color: rgba(255,255,255,0.4); }
+.spec__value { font-family: var(--font-sans); font-size: var(--text-sm); color: rgba(255,255,255,0.85); }
+.project-summary { padding-block: var(--space-section); background: var(--color-bg); }
+.project-summary__inner { max-width: 800px; }
+.project-summary__text { font-family: var(--font-serif-cn); font-size: var(--text-md); font-weight: 300; line-height: 1.9; color: var(--color-ink-muted); letter-spacing: 0.04em; }
+.project-summary__rule { margin-top: var(--space-12); border-top: 1px solid oklch(14% 0.01 60 / 0.1); }
+.project-content { padding-bottom: var(--space-section); background: var(--color-bg); }
+.project-content__body { max-width: 720px; font-size: var(--text-base); line-height: 1.9; color: var(--color-ink-muted); }
+.project-content__body :global(h2) { font-size: var(--text-lg); font-weight: 400; color: var(--color-ink); margin-block: var(--space-8) var(--space-4); }
+.project-content__body :global(h3) { font-size: var(--text-md); font-weight: 400; color: var(--color-ink); margin-block: var(--space-6) var(--space-3); }
+.project-content__body :global(p) { margin-bottom: var(--space-4); }
+.project-content__body :global(ul) { padding-left: 1.5em; margin-bottom: var(--space-4); display: flex; flex-direction: column; gap: var(--space-2); }
+.project-gallery { padding-block: var(--space-section); background: var(--color-bg-alt); }
+.gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); }
+.gallery-item { overflow: hidden; border-radius: var(--radius-md); aspect-ratio: 3/2; }
+.gallery-item--wide { grid-column: 1 / 3; aspect-ratio: 16/9; }
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s var(--ease-out-expo); }
+.gallery-item:hover img { transform: scale(1.04); }
+@media (max-width: 900px) { .gallery-grid { grid-template-columns: 1fr 1fr; } .gallery-item--wide { grid-column: 1 / 3; } }
+@media (max-width: 600px) { .gallery-grid { grid-template-columns: 1fr; } .gallery-item--wide { grid-column: 1; } }
+.project-nav { border-top: 1px solid oklch(14% 0.01 60 / 0.08); padding-block: var(--space-12); background: var(--color-bg); }
+.project-nav__inner { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: var(--space-8); }
+.project-nav__item { display: flex; flex-direction: column; gap: var(--space-2); transition: color var(--duration-normal); }
+.project-nav__item:hover { color: var(--color-accent); }
+.project-nav__item--next { text-align: right; }
+.project-nav__title { font-family: var(--font-serif-cn); font-size: var(--text-md); font-weight: 300; color: inherit; }
+.project-nav__all { color: var(--color-ink-faint); transition: color var(--duration-normal); }
+.project-nav__all:hover { color: var(--color-accent); }
+@media (max-width: 640px) { .project-nav__inner { grid-template-columns: 1fr 1fr; gap: var(--space-4); } .project-nav__all { display: none; } .project-nav__item--next { grid-column: 2; } }
+</style>

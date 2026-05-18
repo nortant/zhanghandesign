@@ -1,0 +1,172 @@
+---
+const navLinks = [
+  { href: '/projects', label: '项目', labelEn: 'Projects' },
+  { href: '/about', label: '关于', labelEn: 'About' },
+  { href: '/contact', label: '联系', labelEn: 'Contact' },
+];
+
+const pathname = Astro.url.pathname;
+---
+
+<header class="site-header" id="site-header">
+  <div class="header-inner container">
+    <a href="/" class="logo" aria-label="张涵设计 首页">
+      <span class="logo-cn">张涵设计</span>
+      <span class="logo-en">Zhang Han Design</span>
+    </a>
+
+    <nav class="nav" aria-label="主导航">
+      <ul class="nav-list" role="list">
+        {navLinks.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class:list={['nav-link', { 'is-active': pathname.startsWith(link.href) }]}
+              aria-current={pathname.startsWith(link.href) ? 'page' : undefined}
+            >
+              <span class="nav-cn">{link.label}</span>
+              <span class="nav-en">{link.labelEn}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <button class="menu-toggle" aria-label="打开导航菜单" aria-expanded="false" id="menu-toggle">
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    transition: background-color var(--duration-normal) var(--ease-in-out),
+                backdrop-filter var(--duration-normal) var(--ease-in-out);
+  }
+
+  .site-header.scrolled {
+    background-color: color-mix(in oklch, var(--color-bg) 85%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid color-mix(in oklch, var(--color-ink) 8%, transparent);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 4.5rem;
+  }
+
+  .logo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1em;
+    line-height: 1;
+  }
+
+  .logo-cn {
+    font-family: var(--font-serif-cn);
+    font-size: 1.05rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: var(--color-ink);
+  }
+
+  .logo-en {
+    font-family: var(--font-sans);
+    font-size: 0.6rem;
+    font-weight: 300;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-ink-muted);
+  }
+
+  .nav-list {
+    display: flex;
+    gap: var(--space-8);
+    list-style: none;
+  }
+
+  .nav-link {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.1em;
+    line-height: 1;
+    position: relative;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: var(--color-accent);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform var(--duration-normal) var(--ease-out-expo);
+  }
+
+  .nav-link:hover::after,
+  .nav-link.is-active::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  .nav-cn {
+    font-family: var(--font-serif-cn);
+    font-size: 0.9rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--color-ink);
+  }
+
+  .nav-en {
+    font-family: var(--font-sans);
+    font-size: 0.55rem;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-ink-faint);
+  }
+
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--space-2);
+  }
+
+  .menu-toggle span {
+    display: block;
+    width: 22px;
+    height: 1px;
+    background-color: var(--color-ink);
+    transition: transform var(--duration-normal) var(--ease-out-expo),
+                opacity var(--duration-normal) var(--ease-out-expo);
+  }
+
+  @media (max-width: 640px) {
+    .nav { display: none; }
+    .menu-toggle { display: flex; }
+  }
+</style>
+
+<script>
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    header?.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+</script>

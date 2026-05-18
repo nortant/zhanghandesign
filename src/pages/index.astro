@@ -1,0 +1,24 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/home/Hero.astro';
+import Philosophy from '../components/home/Philosophy.astro';
+import FeaturedProjects from '../components/home/FeaturedProjects.astro';
+import CtaBanner from '../components/home/CtaBanner.astro';
+import { getCollection } from 'astro:content';
+
+const allProjects = await getCollection('projects');
+const featuredProjects = allProjects
+  .filter(p => p.data.featured)
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 4);
+---
+
+<Layout
+  title="张涵设计 — 景观建筑设计工作室"
+  description="张涵设计是扎根四川、立足西南的景观建筑设计工作室，专注于公园绿地、居住区、滨水及文旅景观的规划与设计。"
+>
+  <Hero />
+  <Philosophy />
+  <FeaturedProjects projects={featuredProjects} />
+  <CtaBanner />
+</Layout>

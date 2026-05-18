@@ -1,0 +1,217 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ProjectCard from '../../components/ui/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+const allProjects = await getCollection('projects');
+const projects = allProjects.sort((a, b) => a.data.order - b.data.order);
+
+const categories = ['全部', '公园绿地', '居住区', '商业景观', '屋顶花园', '滨水景观', '文旅景观', '城市更新'];
+---
+
+<Layout
+  title="项目作品 — 张涵设计"
+  description="探索张涵设计的全部景观作品，涵盖公园绿地、居住区、滨水景观、文旅景观等多个类型，服务成渝两地及西南区域。"
+>
+  <!-- Page Header -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero__inner">
+        <div class="page-hero__text">
+          <p class="label label-accent reveal">项目作品集</p>
+          <h1 class="h-2xl reveal reveal-delay-1">所有项目</h1>
+          <p class="page-hero__subtitle body-lg text-muted reveal reveal-delay-2">
+            跨越十余年的实践，横跨成渝两地，涵盖公园、居住、商业、文旅等多元景观类型。
+          </p>
+        </div>
+        <div class="page-hero__en reveal reveal-delay-1" aria-hidden="true">
+          <span class="h-en">Projects</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Category Filter -->
+  <section class="filter-bar" aria-label="项目类别筛选">
+    <div class="container">
+      <div class="filter-bar__inner">
+        {categories.map(cat => (
+          <button
+            class={`filter-btn ${cat === '全部' ? 'filter-btn--active' : ''}`}
+            data-category={cat}
+            aria-pressed={cat === '全部' ? 'true' : 'false'}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Grid -->
+  <section class="projects-grid-section">
+    <div class="container">
+      <div class="projects-grid" id="projects-grid">
+        {projects.map(project => (
+          <div class="grid-item reveal" data-category={project.data.category}>
+            <ProjectCard
+              title={project.data.title}
+              titleEn={project.data.titleEn}
+              category={project.data.category}
+              location={project.data.location}
+              year={project.data.year}
+              cover={project.data.cover}
+              slug={project.slug}
+              variant="default"
+            />
+          </div>
+        ))}
+      </div>
+      <p class="no-results" id="no-results" hidden>当前分类暂无项目</p>
+    </div>
+  </section>
+</Layout>
+
+<script>
+const filterBtns = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+const gridItems = document.querySelectorAll<HTMLElement>('.grid-item');
+const noResults = document.getElementById('no-results');
+
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const cat = btn.dataset.category ?? '全部';
+
+    filterBtns.forEach(b => {
+      b.classList.remove('filter-btn--active');
+      b.setAttribute('aria-pressed', 'false');
+    });
+    btn.classList.add('filter-btn--active');
+    btn.setAttribute('aria-pressed', 'true');
+
+    let visible = 0;
+    gridItems.forEach(item => {
+      const match = cat === '全部' || item.dataset.category === cat;
+      item.style.display = match ? '' : 'none';
+      if (match) visible++;
+    });
+
+    if (noResults) noResults.hidden = visible > 0;
+  });
+});
+</script>
+
+<style>
+/* ── Page Hero ── */
+.page-hero {
+  padding-top: clamp(6rem, 10vw, 12rem);
+  padding-bottom: var(--space-16);
+  background: var(--color-bg);
+}
+
+.page-hero__inner {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-8);
+}
+
+.page-hero__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  max-width: 56ch;
+}
+
+.page-hero__subtitle {
+  margin-top: var(--space-2);
+}
+
+.page-hero__en {
+  font-family: var(--font-serif-en);
+  font-style: italic;
+  font-size: clamp(4rem, 2rem + 8vw, 10rem);
+  font-weight: 300;
+  color: oklch(14% 0.01 60 / 0.06);
+  line-height: 1;
+  user-select: none;
+  white-space: nowrap;
+}
+
+/* ── Filter Bar ── */
+.filter-bar {
+  padding-block: var(--space-6);
+  border-block: 1px solid oklch(14% 0.01 60 / 0.08);
+  background: var(--color-bg);
+  position: sticky;
+  top: 64px;
+  z-index: 10;
+  backdrop-filter: blur(12px);
+}
+
+.filter-bar__inner {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  padding: 0.45em 1.1em;
+  border: 1px solid oklch(14% 0.01 60 / 0.15);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-ink-muted);
+  cursor: pointer;
+  transition:
+    background-color var(--duration-fast),
+    color var(--duration-fast),
+    border-color var(--duration-fast);
+}
+
+.filter-btn:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.filter-btn--active {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: white;
+}
+
+/* ── Projects Grid ── */
+.projects-grid-section {
+  padding-block: var(--space-16);
+  background: var(--color-bg-alt);
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr));
+  gap: var(--space-6);
+}
+
+.grid-item {
+  display: flex;
+}
+
+.grid-item :global(.project-card) {
+  flex: 1;
+}
+
+.no-results {
+  text-align: center;
+  color: var(--color-ink-faint);
+  font-family: var(--font-serif-cn);
+  font-size: var(--text-md);
+  padding-block: var(--space-16);
+}
+
+@media (max-width: 640px) {
+  .page-hero__en { display: none; }
+  .page-hero__inner { flex-direction: column; }
+}
+</style>

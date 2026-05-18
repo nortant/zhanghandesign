@@ -1,0 +1,359 @@
+﻿---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="联系我们 -- 张涵设计"
+  description="与张涵设计工作室取得联系，探讨您的景观设计需求。"
+>
+  <section class="contact-hero">
+    <div class="container">
+      <div class="contact-hero__inner">
+        <div>
+          <p class="label label-accent reveal">联系我们</p>
+          <h1 class="contact-hero__heading reveal reveal-delay-1">
+            开始一次
+            <em class="h-en">conversation</em>
+          </h1>
+          <p class="contact-hero__sub body-lg text-muted reveal reveal-delay-2">
+            无论您有项目合作意向、设计咨询，还是只是想了解更多关于我们的工作，都欢迎随时联系。
+          </p>
+        </div>
+        <div class="contact-hero__en reveal reveal-delay-1" aria-hidden="true">Contact</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-body">
+    <div class="container contact-body__inner">
+
+      <!-- Form -->
+      <div class="contact-form-wrap reveal">
+        <h2 class="h-lg" style="margin-bottom: var(--space-8)">发送消息</h2>
+        <form class="contact-form" name="contact" method="POST" data-netlify="true" novalidate>
+          <input type="hidden" name="form-name" value="contact" />
+
+          <div class="form-row">
+            <div class="form-field">
+              <label for="name" class="form-label">姓名 <span aria-hidden="true">*</span></label>
+              <input type="text" id="name" name="name" class="form-input" required placeholder="张三" autocomplete="name" />
+            </div>
+            <div class="form-field">
+              <label for="company" class="form-label">公司 / 机构</label>
+              <input type="text" id="company" name="company" class="form-input" placeholder="（选填）" autocomplete="organization" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-field">
+              <label for="email" class="form-label">邮箱 <span aria-hidden="true">*</span></label>
+              <input type="email" id="email" name="email" class="form-input" required placeholder="name@example.com" autocomplete="email" />
+            </div>
+            <div class="form-field">
+              <label for="phone" class="form-label">电话</label>
+              <input type="tel" id="phone" name="phone" class="form-input" placeholder="138 0000 0000（选填）" autocomplete="tel" />
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label for="project-type" class="form-label">项目类型</label>
+            <select id="project-type" name="project-type" class="form-input form-select">
+              <option value="">请选择——</option>
+              <option>公园绿地</option>
+              <option>居住区景观</option>
+              <option>商业景观</option>
+              <option>屋顶花园</option>
+              <option>滨水景观</option>
+              <option>文旅景观</option>
+              <option>城市更新</option>
+              <option>其他</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label for="message" class="form-label">项目描述 / 留言 <span aria-hidden="true">*</span></label>
+            <textarea id="message" name="message" class="form-input form-textarea" required placeholder="简要介绍您的项目或需求……" rows="6"></textarea>
+          </div>
+
+          <button type="submit" class="form-submit">
+            发送消息
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+
+          <p class="form-note">我们通常在 1-2 个工作日内回复。</p>
+        </form>
+      </div>
+
+      <!-- Info -->
+      <aside class="contact-info reveal reveal-delay-1">
+        <div class="info-block">
+          <h3 class="label label-accent">邮件</h3>
+          <a href="mailto:hello@zhanghandesign.com" class="info-value info-link">hello@zhanghandesign.com</a>
+        </div>
+        <div class="info-block">
+          <h3 class="label label-accent">电话</h3>
+          <a href="tel:+861312345xxxx" class="info-value info-link">+86 · 131 1234 ****</a>
+          <p class="info-sub">工作日 09:00 — 18:00</p>
+        </div>
+        <div class="info-block">
+          <h3 class="label label-accent">工作室地址</h3>
+          <p class="info-value">成都市高新区天府大道北段 × × × 号</p>
+          <p class="info-sub">（具体地址预约后提供）</p>
+        </div>
+        <div class="info-block">
+          <h3 class="label label-accent">微信</h3>
+          <p class="info-value">请通过邮件或电话联系后获取</p>
+        </div>
+
+        <div class="info-map">
+          <img
+            src="https://picsum.photos/seed/map-placeholder/600/400"
+            alt="工作室位置示意图"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+          <div class="info-map__label">
+            <span class="label">成都 · 高新区</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+</Layout>
+
+<style>
+.contact-hero {
+  padding-top: clamp(6rem, 10vw, 12rem);
+  padding-bottom: var(--space-section);
+  background: var(--color-bg);
+}
+
+.contact-hero__inner {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-8);
+}
+
+.contact-hero__heading {
+  font-family: var(--font-serif-cn);
+  font-size: var(--text-xl);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: 0.05em;
+  color: var(--color-ink);
+  margin-block: var(--space-4) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: 0.1em;
+}
+
+.contact-hero__heading em {
+  font-family: var(--font-serif-en);
+  font-style: italic;
+  color: var(--color-accent);
+  font-size: 1.1em;
+}
+
+.contact-hero__sub { max-width: 48ch; }
+
+.contact-hero__en {
+  font-family: var(--font-serif-en);
+  font-style: italic;
+  font-size: clamp(4rem, 2rem + 8vw, 10rem);
+  font-weight: 300;
+  color: oklch(14% 0.01 60 / 0.05);
+  line-height: 1;
+  user-select: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Body */
+.contact-body {
+  padding-block: var(--space-section);
+  background: var(--color-bg-alt);
+}
+
+.contact-body__inner {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: clamp(3rem, 6vw, 8rem);
+  align-items: start;
+}
+
+/* Form */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.form-label {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+}
+
+.form-label span { color: var(--color-accent); }
+
+.form-input {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  color: var(--color-ink);
+  background: var(--color-surface);
+  border: 1px solid oklch(14% 0.01 60 / 0.15);
+  border-radius: var(--radius-sm);
+  padding: 0.75em 1em;
+  transition: border-color var(--duration-fast), box-shadow var(--duration-fast);
+  width: 100%;
+  appearance: none;
+}
+
+.form-input::placeholder { color: var(--color-ink-faint); }
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px oklch(42% 0.06 145 / 0.12);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 160px;
+  line-height: 1.7;
+}
+
+.form-select { cursor: pointer; }
+
+.form-submit {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  align-self: flex-start;
+  padding: 0.85em 2.2em;
+  background: var(--color-accent);
+  color: white;
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition:
+    background-color var(--duration-normal) var(--ease-out-expo),
+    transform var(--duration-normal) var(--ease-out-expo);
+}
+
+.form-submit:hover {
+  background: oklch(36% 0.06 145);
+  transform: translateY(-2px);
+}
+
+.form-note {
+  font-size: var(--text-xs);
+  color: var(--color-ink-faint);
+  letter-spacing: 0.04em;
+}
+
+/* Info sidebar */
+.contact-info {
+  position: sticky;
+  top: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding: var(--space-8);
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  border: 1px solid oklch(14% 0.01 60 / 0.07);
+}
+
+.info-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.info-value {
+  font-family: var(--font-serif-cn);
+  font-size: var(--text-base);
+  font-weight: 300;
+  color: var(--color-ink);
+  letter-spacing: 0.03em;
+}
+
+.info-link {
+  transition: color var(--duration-fast);
+}
+
+.info-link:hover { color: var(--color-accent); }
+
+.info-sub {
+  font-size: var(--text-xs);
+  color: var(--color-ink-faint);
+  letter-spacing: 0.06em;
+}
+
+.info-map {
+  position: relative;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  aspect-ratio: 3/2;
+  margin-top: var(--space-4);
+}
+
+.info-map img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(30%) contrast(0.9);
+}
+
+.info-map__label {
+  position: absolute;
+  bottom: var(--space-3);
+  left: var(--space-3);
+  background: oklch(14% 0.01 60 / 0.6);
+  backdrop-filter: blur(6px);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-sm);
+  color: rgba(255,255,255,0.7);
+}
+
+@media (max-width: 900px) {
+  .contact-body__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-info {
+    position: static;
+    order: -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .form-row { grid-template-columns: 1fr; }
+  .contact-hero__en { display: none; }
+  .contact-hero__inner { flex-direction: column; }
+}
+</style>

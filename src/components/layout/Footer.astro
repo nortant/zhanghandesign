@@ -1,0 +1,154 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="footer-inner container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="brand-cn">张涵设计</span>
+        <span class="brand-en">Zhang Han Design</span>
+        <p class="brand-tagline">以自然之力，塑造人居之境</p>
+      </div>
+
+      <nav class="footer-nav" aria-label="页脚导航">
+        <ul role="list">
+          <li><a href="/projects">项目</a></li>
+          <li><a href="/about">关于</a></li>
+          <li><a href="/contact">联系</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer-contact">
+        <p class="label">联系我们</p>
+        <a href="mailto:hello@zhanghandesign.com">hello@zhanghandesign.com</a>
+        <p class="footer-phone">+86 · 1** **** ****</p>
+        <p class="footer-location">四川省成都市 · 重庆市</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copy">
+        &copy; {year} 张涵设计工作室 · 版权所有
+      </p>
+      <p class="footer-domain">zhanghandesign.com</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background-color: var(--color-dark);
+    color: color-mix(in oklch, white 65%, var(--color-dark));
+    margin-top: var(--space-section);
+  }
+
+  .footer-inner {
+    padding-block: var(--space-16);
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: var(--space-12);
+    padding-bottom: var(--space-12);
+    border-bottom: 1px solid color-mix(in oklch, white 12%, var(--color-dark));
+  }
+
+  .brand-cn {
+    display: block;
+    font-family: var(--font-serif-cn);
+    font-size: var(--text-lg);
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    color: white;
+    margin-bottom: var(--space-1);
+  }
+
+  .brand-en {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: color-mix(in oklch, white 40%, var(--color-dark));
+    margin-bottom: var(--space-4);
+  }
+
+  .brand-tagline {
+    font-family: var(--font-serif-cn);
+    font-size: var(--text-sm);
+    font-weight: 300;
+    color: color-mix(in oklch, white 50%, var(--color-dark));
+    font-style: italic;
+  }
+
+  .footer-nav ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .footer-nav a {
+    font-family: var(--font-serif-cn);
+    font-size: var(--text-sm);
+    color: color-mix(in oklch, white 60%, var(--color-dark));
+    letter-spacing: 0.06em;
+    transition: color var(--duration-fast);
+  }
+
+  .footer-nav a:hover {
+    color: white;
+  }
+
+  .footer-contact .label {
+    margin-bottom: var(--space-3);
+    color: color-mix(in oklch, white 35%, var(--color-dark));
+  }
+
+  .footer-contact a {
+    display: block;
+    font-size: var(--text-sm);
+    color: color-mix(in oklch, white 60%, var(--color-dark));
+    margin-bottom: var(--space-2);
+    transition: color var(--duration-fast);
+  }
+
+  .footer-contact a:hover { color: white; }
+
+  .footer-phone,
+  .footer-location {
+    font-size: var(--text-sm);
+    color: color-mix(in oklch, white 40%, var(--color-dark));
+    margin-top: var(--space-2);
+  }
+
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: var(--space-6);
+  }
+
+  .footer-copy,
+  .footer-domain {
+    font-size: var(--text-xs);
+    color: color-mix(in oklch, white 30%, var(--color-dark));
+    letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 768px) {
+    .footer-top {
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
+    }
+
+    .footer-bottom {
+      flex-direction: column;
+      gap: var(--space-2);
+      align-items: flex-start;
+    }
+  }
+</style>
