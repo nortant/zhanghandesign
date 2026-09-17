@@ -1,0 +1,24 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+<Layout title="S4 · LiDAR to DEM accuracy assessment" description="Ground classification of public LiDAR and an accuracy report against check points — in progress.">
+  <div class="wrap">
+  <section class="hero">
+    <div>
+      <p style="margin:0;color:var(--muted);font-weight:600">Project S4 · Geomatics Technician</p>
+      <h1>LiDAR to DEM accuracy assessment</h1>
+      <p class="lede">Re-classifying ground points in the same public LiDAR used for S1 and comparing the result against the
+        data source's own classification, then generating a DEM and contours and scoring their accuracy against the S1
+        check points.</p>
+      <span class="status planned">In progress</span>
+    </div>
+  </section>
+
+  <h2>Planned deliverables</h2>
+  <ul class="plain">
+    <li>PDAL ground classification compared point-for-point against the source-classified ground surface</li>
+    <li>DEM and contours generated from the reclassified ground, RMSE reported against the S1 field check points</li>
+    <li>Optional: a second DSM built with WebODM from public drone imagery, for a three-way comparison</li>
+  </ul>
+  </div>
+</Layout>

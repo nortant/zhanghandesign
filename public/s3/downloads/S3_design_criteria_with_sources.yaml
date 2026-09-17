@@ -1,0 +1,173 @@
+# S3 design criteria - Wolfe Park landscape upgrade (Scheme A: accessible loop pathway + seating node + bioswale + planting)
+# Every value cites its source document and page. Automated design checks (S3) read their thresholds from this file.
+# Sources (local copies with SHA-256 in /srv/geo/data/raw/standards and /srv/geo/data/raw/phz):
+#   DGSS2026 = Calgary Parks and Open Spaces, Development Guidelines and Standard Specifications: Landscape Construction, 2026 (427 pp)
+#   ADS      = The City of Calgary, Access Design Standards (PDF created 2017-05-02; current version on calgary.ca)
+#   PHZ2025  = NRCan, Plant Hardiness Zones of Canada, shapefile produced 2025-06-24 (OGL-Canada)
+version: 0.1.0
+applies_to: "City-owned park; DGSS2026 p34: 'The City of Calgary Access Design Standards (ADS) apply to parks and facilities that are city-owned'"
+
+site:
+  park_class_city_data: SUBNEIGHBOURHOOD PARK
+  note: "DGSS2026 p34 Table 1-2 defines Sub-Neighbourhood Parks as 0.4-1.0 ha; Wolfe Park is 1.48 ha in City data - quantities scaled by area and noted"
+  hardiness_zone: {value: "4a", source: "PHZ2025, polygon containing the park centroid"}
+  program_per_0405ha: {trees_min: 20, trees_max: 40, source: "DGSS2026 p34 Table 1-2"}
+  benches_per_site: {min: 1, max: 5, source: "DGSS2026 p34 Table 1-2"}
+
+pathway:
+  width_min_m: {value: 2.5, source: "DGSS2026 p122 6.1.2.1(2)(a) local pathways"}
+  barrier_free_width_min_m: {value: 1.5, source: "ADS p11 (min 1,500 mm path of travel)"}
+  surface: {value: "75 mm City Mix B asphalt on 100 mm 25 mm crushed gravel (98%)", source: "DGSS2026 p312 Detail Sheet 35"}
+  cross_slope_pct: {value: 2.0, max: 2.0, source: "DGSS2026 p312 Detail Sheet 35 (2%); ADS p15 max cross slope 1:50"}
+  running_slope:
+    accessible_not_ramp_max_pct: {value: 4.0, source: "ADS p15: slopes shallower than 1:25 are sloping walks, not ramps"}
+    ramp_range_pct: {min: 4.0, max: 5.0, source: "ADS p15: ramp running slope between 1:20 and 1:25"}
+    design_limits: {under_3_pct: "acceptable", "3_to_5_pct_max_run_m": 200, "5_to_8_pct_max_run_m": 50, source: "DGSS2026 p123-124 6.1.2.6"}
+    project_target_max_pct: {value: 4.0, rationale: "stay a sloping walk under ADS (no ramp landings/handrails)"}
+  side_slope_max: {value: "3:1", source: "DGSS2026 p312 Detail Sheet 35"}
+  shoulder_mm: {value: 150, source: "DGSS2026 p312 Detail Sheet 35"}
+  setback_vertical_obstacles_m: {value: 1.0, source: "DGSS2026 p122 6.1.2.2(1)"}
+  setback_from_curb_face_m: {value: 1.0, source: "DGSS2026 p122 6.1.2.2(5)"}
+  overhead_clearance_m: {value: 3.0, source: "DGSS2026 p122 6.1.2.2(2)"}
+  junction_angle_deg: {preferred: 90, min_skew: 60, source: "DGSS2026 p123 6.1.2.3(1)"}
+  junction_widening_radius_m: {value: 4.0, source: "DGSS2026 p123 6.1.2.3(2)"}
+  entrance_to_row_angle_deg: {preferred: 90, min_skew: 75, source: "DGSS2026 p123 6.1.2.4(2)"}
+  sightline_clear_m: {value: 5.0, source: "DGSS2026 p123 6.1.2.5"}
+  no_catch_basin_at_entrance: {source: "DGSS2026 p123 6.1.2.4(8); ADS p14 #40"}
+  root_barrier: {value: "Polyspun 300 or approved equivalent", source: "DGSS2026 p312 Detail Sheet 35"}
+
+drainage:
+  grass_swale_min_pct: {value: 2.0, source: "DGSS2026 p101 5.1.3(2)"}
+  grass_swale_over_60m_min_pct: {value: 4.0, else: "weeping tile tied to catch basin, cleanouts every 30 m", source: "DGSS2026 p101 5.1.3(3)"}
+  trap_lows: {value: "must be approved by Parks and integral to design", source: "DGSS2026 p101 5.1.3(5)"}
+  pathways_drain: {source: "ADS p17 #53: all pathways designed to drain, avoid puddles and ice"}
+
+topsoil_min_mm:
+  seeded: {value: 150, source: "DGSS2026 p104 5.1.10(2)"}
+  sodded: {value: 125, source: "DGSS2026 p104 5.1.10(2)"}
+  flower_beds: {value: 450, source: "DGSS2026 p104 5.1.10(2)"}
+  shrub_beds: {value: 600, source: "DGSS2026 p104 5.1.10(2)"}
+  parks_encouraged_turf: {value: 300, source: "DGSS2026 p104 note"}
+
+trees:
+  protection:
+    tpz_radius_m: {value: 4.0, or: "drip line", source: "DGSS2026 p85 4.1.6(1)"}
+    tree_protection_plan_trigger_m: {value: 6.0, source: "DGSS2026 p85-86 4.1.6(1), (3)(e),(g); Tree Protection Bylaw 23M2002"}
+    no_stockpile_in_tpz: {source: "DGSS2026 p86 4.1.6(3)(d)"}
+    inventory_within_m: {value: 6.0, source: "DGSS2026 p86 4.1.6(2)"}
+  palette_source: {value: "DGSS2026 Table 4-1 Suggested Tree List (hardiness zone <= site zone)", source: "DGSS2026 p81-82"}
+  soil_volume_m3: {large: 30, medium: 20, small: 10, source: "DGSS2026 p81-83 Tables 4-1, 4-2"}
+  max_share_one_genus_pct: {value: 15, source: "DGSS2026 p81 4.1.1(4)"}
+  planting_in_groups_preferred: {source: "DGSS2026 p81 4.1.1(3)"}
+  spacing_setbacks:            # DGSS2026 p83 Table 4-3 (open spaces)
+    deciduous_to_hard_surface: {value: "0.5 x max spread", source: "DGSS2026 p83 Table 4-3"}
+    coniferous_to_hard_surface_m: {value: 2.0, source: "DGSS2026 p83 Table 4-3"}
+    poplar_willow_to_hard_surface_m: {value: 5.0, source: "DGSS2026 p83 Table 4-3"}
+    tree_to_tree: {value: "0.5 x max spread (other deciduous and coniferous); min(0.5 x max spread, 5 m) only for poplar, willow and shrubs", source: "DGSS2026 p83 Table 4-3", corrected: "2026-09-17 S3.3 re-read of the table"}
+    beds_to_beds_and_vertical_m: {value: 2.5, source: "DGSS2026 p83 4.1.2"}
+    within_3_5m_of_hard_surface_requires_mulched_bed: {source: "DGSS2026 p83 Table 4-3 note b"}
+  utility_setbacks_m:          # DGSS2026 p84 Table 4-4
+    street_light_deciduous: {value: 4.0, source: "DGSS2026 p84 Table 4-4"}
+    street_light_coniferous: {value: 5.0, source: "DGSS2026 p84 Table 4-4"}
+    hydrant_deciduous: {value: 2.5, source: "DGSS2026 p84 Table 4-4"}
+    hydrant_coniferous: {value: 3.0, source: "DGSS2026 p84 Table 4-4"}
+  planting_detail_40_100mm:    # DGSS2026 p291 Detail Sheet 23 (image; values read from the sheet)
+    pit_width: {value: "max(450 mm, 2 x root ball width) where loam < 300 mm", source: "DGSS2026 p291 Detail Sheet 23"}
+    trunk_flare: {value: "at grade, max 25 mm above", source: "DGSS2026 p291 Detail Sheet 23"}
+    mulch: {value: "50-75 mm, 50 mm off trunk, to drip line or 1000 mm", source: "DGSS2026 p291 Detail Sheet 23"}
+    tree_well_mm: {value: 1000, source: "DGSS2026 p291 Detail Sheet 23"}
+    staking_optional: {value: "3 x 1800 mm painted T-bars, 2 mm braided nylon strap", source: "DGSS2026 p291 Detail Sheet 23"}
+    wire_basket_burlap: {value: "remove upper 1/3 minimum", source: "DGSS2026 p291 Detail Sheet 23"}
+
+site_furniture:
+  bench:
+    length_m: {value: 1.8, source: "DGSS2026 p157 7.4.3.3(1)(a)"}
+    base: {value: "concrete or asphalt pad, or compacted granular base", source: "DGSS2026 p157 7.4.3.3(3)(a)"}
+    seat_height_mm:
+      dgss: {min: 410, max: 440, source: "DGSS2026 p157 7.4.3.3(3)(b)"}
+      ads: {min: 450, max: 500, source: "ADS p13 #28"}
+      project_decision: {value: 450, rationale: "ADS applies to City-owned parks (DGSS2026 p34); 450 mm meets ADS and is nearest the DGSS range. Conflict flagged for Parks review (RFI) in the drawing notes."}
+    wheelchair_space_beside_mm: {value: "850 x 1200 level firm surface", source: "ADS p13 #30"}
+  waste_receptacle_from_bench_m: {value: 10, note: "wherever possible", source: "DGSS2026 p157 7.4.3.2(3)(d)"}
+  bollard_min_height_mm: {value: 600, source: "ADS p12 #25"}
+
+grading:                       # added for S3.2
+  site_min_gradient_pct: {value: 2.0, source: "DGSS2026 p99 5.1.2.1(1): minimum 2% gradient across Reserve Parcels"}
+  excessive_fill: {value: "not acceptable where it compromises the site design", source: "DGSS2026 p99 5.1.2.1(2)"}
+  pathway_surface_cross_fall_pct: {value: 2.0, form: "central crown or 2% outslope", source: "DGSS2026 p128 6.1.3.4(3)"}
+  pathway_no_trapped_lows: {source: "DGSS2026 p128 6.1.3.4(3)"}
+  pathway_not_a_swale: {value: "positive drainage away from path; swales and culverts (Detail Sheet 38) where flow must cross", source: "DGSS2026 p128 6.1.3.4(4)"}
+  project_decisions:
+    design_grade_cap_pct: {value: 3.8, rationale: "0.2% construction tolerance under the 4% (1:25) sloping-walk limit (ADS p15)"}
+    daylight_slope_hv: {value: 4.0, rationale: "4:1 lets turf be mowed mechanically (LID Module 2 p2-22 2.4.1); never steeper than the 3:1 maximum (Detail 35)"}
+    no_dig_under_drip_line: {value: "no excavation below the sod layer; 175 mm pavement structure built up on existing grade (soft constraint, shortfalls reported for Urban Forestry review)", rationale: "drip line zone outside the 4 m TPZ, DGSS2026 p85-86 protection intent"}
+    no_dig_sod_strip_m: {value: 0.075, rationale: "assumption: remove sod only (<= 75 mm) before geotextile + granular; confirm with Urban Forestry (RFI)"}
+    culvert_min_catchment_m2: {value: 1000, rationale: "assumption for concept: concentrated flow from >= 1000 m2 crosses the path in a culvert (DGSS p128 6.1.3.4(4), Detail 38); sizing by Parks Water Services (RFI)"}
+
+rain_garden:                   # City of Calgary LID Guidelines Module 2 Bioretention & Bioswales (2016)
+  ponding_depth_standard_mm: {value: 200, source: "LID-M2 p2-5 2.2.3 (PDF p15)"}
+  ponding_depth_practical_max_mm: {value: 300, source: "LID-M2 p2-5 2.2.3 (PDF p15); 336 mm theoretical from media spec"}
+  drawdown_hours_max: {value: 24, source: "LID-M2 p2-12 2.2.5 (PDF p22)"}
+  growing_media_depth_mm: {value: 450, source: "LID-M2 Figure 1-1 (PDF p9) recommended"}
+  side_slope_hv: {preferred: 4.0, max_steep: 2.0, source: "LID-M2 p2-22 2.4.1: 3:1 or 4:1 preferred, 4:1 for mechanised mowing"}
+  base_slope_max_pct: {value: 1.0, source: "LID-M2 p2-23 2.4.2 (PDF p33)"}
+  overflow: {value: "overflow route to storm inlet or weir for events above the ponding volume", source: "LID-M2 p2-5 2.2.3"}
+  approval: {value: "trap low - requires Parks approval, must be integral to design", source: "DGSS2026 p101 5.1.3(5)"}
+
+planting:                      # added for S3.3
+  shrubs_m2_per_ha: {min: 50, max: 150, source: "DGSS2026 p34 Table 1-2"}
+  plan_requirements: {value: "crowns at 2/3 mature size; plant list with botanical/common name, quantity, size, habit, spacing, remarks; bed outlines; contours 0.5 m", source: "DGSS2026 p54 2.3.4"}
+  shrub_edge_clearance_m: {value: 0.5, rule: "shrub drip line to bed edge", source: "DGSS2026 p88 4.1.8"}
+  sightline_clear_m: {value: 5.0, rule: "no trees/shrubs within 5 m of pathway junctions and street connections", source: "DGSS2026 p123 6.1.2.5"}
+  stock_sizes:
+    deciduous: {value: "60 mm caliper, wire basket, spade dug; root ball 70 cm dia x 40 cm deep", source: "DGSS2026 p89 Table 4-6"}
+    coniferous: {value: "200 cm height, burlap + wire basket; root ball 80 cm", source: "DGSS2026 p90 Table 4-7"}
+    shrubs: {value: "#2 container (1 gal+ per Calgary Plant Lists preferred form)", source: "Calgary Plant Lists 2019 species tables"}
+    rain_garden_plugs: {value: "plugs at 300 mm on centre", source: "LID-M2 3.7.4 (PDF p57)"}
+  mature_size_source: {value: "Jeffries Nurseries (Portage la Prairie, MB) plant pages, retrieved 2026-09-17", note: "DGSS Table 4-3 note c names Alberta Yards & Gardens: What to Grow (Agdex 200/32-1), which is not available online; values to be verified against Agdex (RFI)"}
+  project_decisions:
+    rooting_depth_for_soil_volume_m: {value: 0.6, rationale: "soil volume (Table 4-2) converted to an unobstructed radius r = sqrt(V / (pi x 0.6))"}
+    no_new_pits_inside_existing_drip_line: {value: true, rationale: "pit excavation would cut roots of retained trees (same intent as no-dig)"}
+    rain_garden_tree_clearance_m: {value: 2.0, rationale: "keep new root balls out of the bioretention basin and its 4:1 sides"}
+    genus_rule_scope: {value: "new trees each of a different genus; park-wide shares reported", rationale: "DGSS 15% rule is community-scale; with fewer than 7 new trees one tree is already > 15% of the new stock"}
+
+plant_palette:
+  trees:                       # all from DGSS2026 Table 4-1 (p81-82), hardiness zone <= 4a
+    - {key: TA, botanical: "Tilia americana", common: "American basswood (linden)", genus: Tilia, kind: deciduous, size_class: large, soil_m3: 30, zone: "3", height_m: 18.3, spread_m: 12.2, size_ref: "https://jeffriesnurseries.com/american-linden/"}
+    - {key: GT, botanical: "Gleditsia triacanthos 'Harve'", common: "Northern Acclaim honeylocust", genus: Gleditsia, kind: deciduous, size_class: medium, soil_m3: 20, zone: "3b", height_m: 12.2, spread_m: 10.7, size_ref: "https://jeffriesnurseries.com/northern-acclaim-honeylocust/"}
+    - {key: AG, botanical: "Aesculus glabra", common: "Ohio buckeye", genus: Aesculus, kind: deciduous, size_class: small, soil_m3: 10, zone: "3", height_m: 12.2, spread_m: 9.1, size_ref: "https://jeffriesnurseries.com/ohio-buckeye/"}
+    - {key: CM, botanical: "Crataegus x mordenensis 'Toba'", common: "Toba hawthorn", genus: Crataegus, kind: deciduous, size_class: small, soil_m3: 10, zone: "3b", height_m: 6.1, spread_m: 4.6, size_ref: "https://jeffriesnurseries.com/toba-hawthorn/"}
+    - {key: PP, botanical: "Pinus ponderosa", common: "ponderosa pine", genus: Pinus, kind: coniferous, size_class: medium, soil_m3: 20, zone: "3a", height_m: 18.3, spread_m: 9.1, size_ref: "https://jeffriesnurseries.com/ponderosa-pine/"}
+    - {key: LS, botanical: "Larix sibirica", common: "Siberian larch", genus: Larix, kind: coniferous, size_class: medium, soil_m3: 20, zone: "2", height_m: 21.3, spread_m: 6.1, size_ref: "https://jeffriesnurseries.com/siberian-larch/"}
+  shrubs:                      # City of Calgary Plant Lists 2019
+    - {key: DF, botanical: "Dasiphora fruticosa 'Goldfinger'", common: "Goldfinger potentilla", height_m: 0.9, spread_m: 0.9, list_ref: "Plant Lists p78 (Dasiphora fruticosa)", size_ref: "https://jeffriesnurseries.com/goldfinger-potentilla/", band: front}
+    - {key: RA, botanical: "Ribes aureum", common: "golden currant", height_m: 1.5, spread_m: 1.5, list_ref: "Plant Lists p112", size_ref: "https://jeffriesnurseries.com/golden-currant/", band: middle}
+    - {key: PO, botanical: "Physocarpus opulifolius 'Diabolo'", common: "Diabolo ninebark", height_m: 1.8, spread_m: 1.8, list_ref: "Plant Lists p111 (Physocarpus spp., cultivar)", size_ref: "https://jeffriesnurseries.com/diabolo-ninebark/", band: back}
+  rain_garden:                 # LID-M2 Appendix B (PDF p106-110); plugs 300 mm o.c.
+    base:   # moist + wet tolerant
+      - {key: CB, botanical: "Carex bebbii", common: "Bebb's sedge", share: 0.4, ref: "LID-M2 App. B PDF p108"}
+      - {key: JB, botanical: "Juncus balticus", common: "wire rush", share: 0.3, ref: "LID-M2 App. B PDF p108"}
+      - {key: DC, botanical: "Deschampsia caespitosa", common: "tufted hair grass", share: 0.3, ref: "LID-M2 App. B PDF p108"}
+    side_slopes:  # moist, drier positions
+      - {key: BG, botanical: "Bouteloua gracilis", common: "blue grama", share: 0.4, ref: "LID-M2 App. B PDF p108 (good for slopes)"}
+      - {key: DC, botanical: "Deschampsia caespitosa", common: "tufted hair grass", share: 0.3, ref: "LID-M2 App. B PDF p108"}
+      - {key: AF, botanical: "Agastache foeniculum", common: "giant hyssop", share: 0.3, ref: "LID-M2 App. B PDF p110"}
+
+tree_protection:               # added for S3.4
+  plan_trigger: {value: "disturbance, storage or access within 6 m of a public tree on City land -> Urban Forestry-approved Tree Protection Plan", source: "DGSS2026 p85 4.1.6(1); TPP Guide 2025 p1"}
+  tpz: {value: "min 4 m radius from trunk; City recommends extending to the drip line", source: "DGSS2026 p85 4.1.6(1); TPP Guide 2025 p2"}
+  barrier: {value: "fence >= 1.2 m above grade: solid wood frame with orange snow fencing stapled outside, or metal fencing; warning signs", source: "TPP Guide 2025 p2"}
+  barrier_restrictions: {value: "Alberta 1-Call before installing; must not interfere with fire hydrant access or obscure intersections / traffic signage", source: "TPP Guide 2025 p2"}
+  prohibited_in_tpz: {value: "work, material storage (incl. soil stockpiles), site disturbance, entry, attaching objects to trees", source: "DGSS2026 p86-87 4.1.6(3)(d)(i)(j); TPP Guide 2025 p2"}
+  care: {value: "supplemental water at least once per week during the project", source: "TPP Guide 2025 p2 (agreement)"}
+  access: {value: "site access routes outside the TPZ and as far from trunks as possible; anti-compaction devices to minimise root damage", source: "TPP Guide 2025 p2 checklist"}
+  row_barrier_area: {value: "report m2 of barriers on road right-of-way (hoarding permit)", source: "TPP Guide 2025 p2 checklist"}
+  pruning_removal: {value: "only with written Urban Forestry authorization, by a qualified contractor; removals last resort with appraised compensation", source: "DGSS2026 p86-87 4.1.6(3)(c),(4); TPP Guide 2025 p2"}
+  plan_contents: {source: "DGSS2026 p86 4.1.6(2) bullet list; TPP Guide 2025 p2 checklist", items: [inventory_6m, tpz, staging_storage, limits_of_disturbance, construction_methods_equipment, protection_measures, retain_prune_remove, pre_post_care, responsible_contact, preconstruction_meeting, row_barrier_area]}
+  new_tree_guards: {value: "1200 mm galvanized 1 in. mesh wire guard, 150 mm clear of trunk on existing trees, 300 mm dia on new trees", source: "DGSS2026 p301 Detail Sheet 27b (beaver / rabbit protection, where required)"}
+  project_decisions:
+    limit_of_work_offset_m: {value: 0.75, rationale: "working room for paver / plate compactor beyond pavement, grading limit and beds; never inside a 4 m TPZ"}
+    fence_to_drip_line_where_possible: {value: true, rationale: "follows the City recommendation; clipped back to the limit of work, never inside 4 m"}
+    staging_area_m2: {value: 150, rationale: "materials, stockpile, bins; outside every drip line + 2 m, off rain garden, beds and sight lines, next to a street entrance"}
+    tree_pit_width_m: {value: 1.6, rationale: "Detail 23: pit >= 2 x root ball (80 cm)"}
+    pathway_heights_note: {value: "tree heights were not surveyed; overhead clearance (3.0 m) needs a field check before any pruning request"}

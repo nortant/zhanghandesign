@@ -1,0 +1,335 @@
+{
+ "site": {
+  "name": "Wolfe Park",
+  "city": "Calgary, Alberta",
+  "area_ha": 1.48,
+  "hardiness_zone": "4a",
+  "existing_slope_p50": 4.6,
+  "existing_slope_p95": 7.5
+ },
+ "criteria": {
+  "cited_values": 93,
+  "documents": [
+   "DGSS 2026",
+   "Access Design Standards",
+   "LID Guidelines Module 2 (2016)",
+   "Tree Protection Plan Guide (2025)",
+   "City of Calgary Plant Lists (2019)",
+   "NRCan Plant Hardiness Zones 2025"
+  ]
+ },
+ "path": {
+  "loop_m": 284.9,
+  "spurs_m": 174.3,
+  "width_m": 2.5,
+  "loop_existing_max_pct": 6.6,
+  "loop_design_max_pct": 3.8,
+  "spurs": {
+   "E1": 3.8,
+   "E2": 10.33,
+   "E3": 6.89,
+   "E4": 3.8
+  },
+  "barrier_free": [
+   "E1",
+   "E4"
+  ]
+ },
+ "trees": {
+  "surveyed": 210,
+  "inside_park": 140,
+  "removals": 0,
+  "new": 5,
+  "cap": 145,
+  "inventory_6m": 61,
+  "fence_m": 1181.7,
+  "no_dig_m": 105.4,
+  "mats_m2": 90.5,
+  "tpz_graded_m2": 0.0,
+  "genus_after": {
+   "Picea": 20.7,
+   "Fraxinus": 15.9,
+   "Prunus": 11.0,
+   "Syringa": 9.7
+  }
+ },
+ "earthworks": {
+  "cut_m3": 51.6,
+  "fill_m3": 111.1,
+  "net_m3": 59.6,
+  "grading_limit_m2": 1469.8
+ },
+ "rain_garden": {
+  "overflow": {
+   "x": -6436.3,
+   "y": 5654667.9,
+   "z": 1081.91
+  },
+  "base_z": 1081.71,
+  "base_area_m2": 69.3,
+  "overflow_route_m": 25.8,
+  "overflow_route_crosses_path": false,
+  "overflow_route_end": {
+   "x": -6413.1,
+   "y": 5654661.4
+  },
+  "ponding_area_m2": 120.3,
+  "ponding_volume_m3": 19.0,
+  "plugs": 1218
+ },
+ "planting": {
+  "shrub_beds_m2": 177.3,
+  "shrubs": 38,
+  "plugs": 1218
+ },
+ "qa": {
+  "total": 36,
+  "status": {
+   "PASS": 28,
+   "EXCEPTION": 2,
+   "RFI": 2,
+   "REVIEW": 2,
+   "OPEN": 1,
+   "PASS (TREATED)": 1
+  },
+  "open_items": [
+   {
+    "id": "A1-E2",
+    "group": "Pathway",
+    "item": "running slope E2",
+    "value": "design profile max 10.3%; surface max 10.3% (2 m baseline), 18 m over 4%",
+    "criterion": "<= 4% (1:25 sloping walk)",
+    "status": "EXCEPTION",
+    "source": "ADS p15; project target",
+    "note": "RFI-2: roots under drip line prevent lowering; 1 m spot readings on the 0.25 m surface raster peak at 10.8%"
+   },
+   {
+    "id": "A1-E3",
+    "group": "Pathway",
+    "item": "running slope E3",
+    "value": "design profile max 6.9%; surface max 6.9% (2 m baseline), 14 m over 4%",
+    "criterion": "<= 4% (1:25 sloping walk)",
+    "status": "EXCEPTION",
+    "source": "ADS p15; project target",
+    "note": "RFI-2: roots under drip line prevent lowering; 1 m spot readings on the 0.25 m surface raster peak at 7.0%"
+   },
+   {
+    "id": "A3",
+    "group": "Pathway",
+    "item": "trapped lows on or next to the path",
+    "value": "1 (39 mm / 1.1 m2)",
+    "criterion": "none",
+    "status": "OPEN",
+    "source": "DGSS p128 6.1.3.4(3)",
+    "note": "at a TPZ edge restraint; resolve with a weep gap / local regrade in detailing"
+   },
+   {
+    "id": "A6",
+    "group": "Pathway",
+    "item": "overhead clearance under crowns",
+    "value": "14 trees over path",
+    "criterion": ">= 3.0 m",
+    "status": "RFI",
+    "source": "DGSS p122 6.1.2.2(2)",
+    "note": "tree heights not surveyed (RFI-6)"
+   },
+   {
+    "id": "E2",
+    "group": "Access",
+    "item": "bench seat height",
+    "value": "450 mm",
+    "criterion": "DGSS 410-440 vs ADS 450-500",
+    "status": "RFI",
+    "source": "DGSS p157; ADS p13",
+    "note": "RFI-1"
+   }
+  ]
+ },
+ "drawings": {
+  "sheets": [
+   "L-001",
+   "L-101",
+   "L-201",
+   "L-301",
+   "L-401",
+   "L-501"
+  ],
+  "scale": "1:500 plans, details as noted",
+  "dwg_roundtrip": {
+   "sheets": 6,
+   "audit_errors": 0,
+   "differences": [
+    "layers"
+   ]
+  }
+ },
+ "quantities": [
+  {
+   "item": "Tree protection fence 1.2 m (Detail 4)",
+   "qty": 1181.7,
+   "unit": "m"
+  },
+  {
+   "item": "Tree protection warning signs (1 per 10 m of fence, min 1 per enclosure)",
+   "qty": 131.0,
+   "unit": "ea"
+  },
+  {
+   "item": "Ground protection mats under drip lines",
+   "qty": 90.5,
+   "unit": "m2"
+  },
+  {
+   "item": "Staging area set-up and restoration",
+   "qty": 135.0,
+   "unit": "m2"
+  },
+  {
+   "item": "Cut (neat)",
+   "qty": 51.6,
+   "unit": "m3"
+  },
+  {
+   "item": "Fill (neat)",
+   "qty": 111.1,
+   "unit": "m3"
+  },
+  {
+   "item": "Net import",
+   "qty": 59.6,
+   "unit": "m3"
+  },
+  {
+   "item": "Asphalt pathway 2.5 m, 75 mm City Mix B (Detail 1)",
+   "qty": 1144.9,
+   "unit": "m2"
+  },
+  {
+   "item": "Asphalt (75 mm), volume",
+   "qty": 85.9,
+   "unit": "m3"
+  },
+  {
+   "item": "25 mm crushed gravel base 100 mm incl. shoulders",
+   "qty": 128.2,
+   "unit": "m3"
+  },
+  {
+   "item": "Pathway centreline length",
+   "qty": 459.3,
+   "unit": "m"
+  },
+  {
+   "item": "No-dig construction: geotextile (Detail 2)",
+   "qty": 295.1,
+   "unit": "m2"
+  },
+  {
+   "item": "Root-friendly edge restraint (no-dig edges both sides + TPZ edges)",
+   "qty": 218.0,
+   "unit": "m"
+  },
+  {
+   "item": "Culvert under pathway (DGSS Detail 38, size RFI-4)",
+   "qty": 1.0,
+   "unit": "ea"
+  },
+  {
+   "item": "Concrete seating pad (Detail 6)",
+   "qty": 28.2,
+   "unit": "m2"
+  },
+  {
+   "item": "Bench 1.8 m with back and armrests",
+   "qty": 1.0,
+   "unit": "ea"
+  },
+  {
+   "item": "Waste receptacle (City standard) on 1.5 x 1.5 m concrete pad",
+   "qty": 1.0,
+   "unit": "ea"
+  },
+  {
+   "item": "Protect existing memorial benches in place",
+   "qty": 3.0,
+   "unit": "ea"
+  },
+  {
+   "item": "Bioretention growing media 450 mm",
+   "qty": 31.2,
+   "unit": "m3"
+  },
+  {
+   "item": "Plugs 300 mm o.c.",
+   "qty": 1218.0,
+   "unit": "ea"
+  },
+  {
+   "item": "Overflow splash pad at outfall (DGSS Detail 46)",
+   "qty": 1.0,
+   "unit": "ea"
+  },
+  {
+   "item": "Deciduous trees 60 mm cal. WB",
+   "qty": 3.0,
+   "unit": "ea"
+  },
+  {
+   "item": "Coniferous trees 2.0 m WB",
+   "qty": 2.0,
+   "unit": "ea"
+  },
+  {
+   "item": "Shrubs #2 container",
+   "qty": 38.0,
+   "unit": "ea"
+  },
+  {
+   "item": "Shrub bed topsoil 600 mm",
+   "qty": 106.4,
+   "unit": "m3"
+  },
+  {
+   "item": "Shredded wood mulch 75 mm (beds + 1.0 m tree wells)",
+   "qty": 13.6,
+   "unit": "m3"
+  },
+  {
+   "item": "Topsoil 125 mm + sod on disturbed turf",
+   "qty": 1247.9,
+   "unit": "m2"
+  },
+  {
+   "item": "Topsoil 125 mm, volume",
+   "qty": 156.0,
+   "unit": "m3"
+  }
+ ],
+ "map_center": [
+  -114.0922464264897,
+  51.028570255487544
+ ],
+ "layers": {
+  "park": 1,
+  "pavement": 1,
+  "path_centreline": 5,
+  "seating_node": 1,
+  "site_furniture": 2,
+  "rain_garden": 2,
+  "rain_garden_planting": 2,
+  "shrub_beds": 4,
+  "shrubs": 38,
+  "new_trees": 5,
+  "existing_trees": 210,
+  "tpz": 61,
+  "protection_fence": 28,
+  "no_dig": 11,
+  "ground_protection": 1,
+  "staging": 2,
+  "grading_limit": 1,
+  "contours_proposed": 16,
+  "spot_elevations": 13,
+  "flow_crossings": 3,
+  "context_linework": 82
+ }
+}

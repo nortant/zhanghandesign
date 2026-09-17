@@ -1,0 +1,172 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import m from "../../data/s3_metrics.json";
+const dl = (f: string) => `/s3/downloads/${f}`;
+const sheets = [
+  { id: "L-001", title: "Cover, general notes & drawing index", note: "Standards list, 7 requests for information, design summary" },
+  { id: "L-101", title: "Tree protection & removals plan", note: `${m.trees.inventory_6m}-tree inventory, ${m.trees.fence_m} m of barrier fence, no removals` },
+  { id: "L-201", title: "Layout & materials plan", note: "Chainage, setting-out coordinates, materials keyed to details" },
+  { id: "L-301", title: "Grading & drainage plan", note: "Proposed contours, grade arrows, spot elevations, loop profile, earthworks" },
+  { id: "L-401", title: "Planting plan & plant schedule", note: "Crowns at 2/3 mature spread, bed layouts, rain garden mixes" },
+  { id: "L-501", title: "Details", note: "7 details redrawn from the cited standards with this project's values" },
+];
+const decisions = [
+  { q: "How many trees can be planted?", a: `${m.trees.new} new trees`, why: `DGSS Table 1-2 caps this park at ${m.trees.cap} trees; ${m.trees.inside_park} already stand inside it. The remaining allowance set the number - each new tree is a different genus, and the two genera already over the 15 % limit (${Object.entries(m.trees.genus_after).slice(0, 2).map(([k, v]) => `${k} ${v}%`).join(", ")}) were not increased.` },
+  { q: "Where can the path go?", a: "0 trees removed, 0 m² graded inside a tree protection zone", why: "Every 4 m protection zone (plus the 2.5 m path width) was treated as solid. The loop is the cheapest cycle around a central island in the remaining free space, which makes it a real loop rather than a set of crossing corridors." },
+  { q: "What about roots under the canopy?", a: `${m.trees.no_dig_m} m of no-dig path, ${m.trees.mats_m2} m² of ground protection`, why: "Inside a drip line the design may not cut: the pavement is built up at least 100 mm on existing grade over geotextile, and construction traffic runs on mats." },
+  { q: "Can every entrance be barrier-free?", a: `Loop, E1 and E4 at ≤ ${m.path.loop_design_max_pct} %`, why: `E2 (${m.path.spurs.E2.toFixed(1)} %) and E3 (${m.path.spurs.E3.toFixed(1)} %) cannot reach 4 % without cutting roots at the tie-in, so they are documented exceptions with the accessible entrances signed; the existing ground runs to ${m.site.existing_slope_p95} % at the 95th percentile.` },
+  { q: "Where does the water go?", a: `Rain garden ${m.rain_garden.ponding_area_m2} m², ${m.rain_garden.ponding_volume_m3} m³ storage`, why: "200 mm ponding over a flat base with 4:1 sides (LID Module 2); the overflow route runs overland to the park edge without crossing the path, and concentrated flow over 1000 m² crosses the path in a culvert." },
+];
+const openItems = m.qa.open_items;
+const qty = m.quantities.filter((q: { item: string }) => !q.item.startsWith("Pathway centreline"));
+---
+<Layout title="S3 · Landscape construction drawings" description="Concept A: accessible loop path, rain garden and planting on a surveyed base plan, with tree protection, grading, plant schedule and a design QA report.">
+  <div class="wrap">
+  <section class="hero">
+    <div>
+      <p style="margin:0;color:var(--muted);font-weight:600">Project S3 · Landscape Architectural Technician</p>
+      <h1>Landscape construction drawings</h1>
+      <p class="lede">Wolfe Park, Calgary ({m.site.area_ha} ha, hardiness zone {m.site.hardiness_zone}). An accessible {m.path.width_m} m loop path
+      ({m.path.loop_m} m plus {m.path.spurs_m} m of entrance spurs), a seating node, a rain garden and new planting, designed on the S1 survey and
+      issued as six ARCH D sheets with a tree protection plan, quantities and a design QA report.</p>
+      <div class="notice"><strong>Standards first.</strong> {m.criteria.cited_values} design values were read out of the City of Calgary standards before
+      any line was drawn, each stored with its document and page: {m.criteria.documents.join(", ")}.</div>
+      <div class="btns">
+        <a class="btn primary" href={dl("S3_landscape_drawings_L-001_to_L-501.pdf")}>Open the drawing set (PDF)</a>
+        <a class="btn" href={dl("S3_landscape_drawings_DWG.zip")}>Download DWG</a>
+        <a class="btn" href="#map-section">Explore the design map</a>
+      </div>
+    </div>
+    <a class="thumb" href={dl("S3_landscape_drawings_L-001_to_L-501.pdf")} aria-label="Open the drawing set">
+      <img src="/s3/drawing_thumbnail.png" alt="Sheet L-201 layout and materials plan, ARCH D, 1:500" width="1440" height="960" loading="eager" />
+    </a>
+  </section>
+
+  <h2>Results</h2>
+  <div class="grid cards">
+    <div class="card metric"><div class="value">{m.trees.removals} / {m.trees.tpz_graded_m2} m²</div><div class="label">Trees removed / regraded inside a protection zone</div>
+      <div class="note">{m.trees.inventory_6m} trees inventoried within 6 m of the work; {m.trees.fence_m} m of barrier fence</div></div>
+    <div class="card metric"><div class="value">{m.path.loop_design_max_pct} %</div><div class="label">Maximum running slope on the loop</div>
+      <div class="note">from {m.path.loop_existing_max_pct} % existing; E1 and E4 also ≤ 4 %, E2 / E3 documented exceptions</div></div>
+    <div class="card metric"><div class="value">{m.earthworks.cut_m3} / {m.earthworks.fill_m3} m³</div><div class="label">Cut / fill</div>
+      <div class="note">net import {m.earthworks.net_m3} m³ over {m.earthworks.grading_limit_m2} m² of grading</div></div>
+    <div class="card metric"><div class="value">{m.qa.status.PASS} / {m.qa.total}</div><div class="label">QA checks passed</div>
+      <div class="note">re-measured from the final geometry; the rest are documented exceptions, RFIs or detailing items</div></div>
+  </div>
+
+  <h2>Existing park and proposed design</h2>
+  <p>Drag the slider: the surveyed park on the left, the proposed works on the right (same extent, same scale).</p>
+  <div class="compare" id="compare">
+    <img src="/s3/compare_proposed.png" alt="Proposed pathway, seating node, rain garden and planting" width="1600" height="1700" loading="lazy" />
+    <img class="top" src="/s3/compare_existing.png" alt="Existing park: boundary, sidewalks, surveyed trees and benches" width="1600" height="1700" loading="lazy" />
+    <div class="divider"></div>
+  </div>
+  <input id="compare-range" type="range" min="0" max="100" value="50" aria-label="Reveal the proposed design" />
+  <div class="compare-labels"><span>Existing (S1 survey)</span><span>Proposed (Concept A)</span></div>
+
+  <h2>What the standards decided</h2>
+  <div class="table-scroll"><table>
+    <thead><tr><th>Question</th><th>Answer</th><th>What forced it</th></tr></thead>
+    <tbody>{decisions.map((d) => <tr><td>{d.q}</td><td><strong>{d.a}</strong></td><td>{d.why}</td></tr>)}</tbody>
+  </table></div>
+
+  <h2 id="map-section">Design map</h2>
+  <p>Every layer comes from the project files. Click a tree, bed, no-dig segment, spot elevation or flow crossing to see the reasoning behind it.</p>
+  <div class="map-wrap">
+    <div class="card toggles" aria-label="Map layers">
+      <label><input type="checkbox" data-group="base" checked /><span class="swatch" style="background:#333"></span>Park boundary &amp; context</label>
+      <label><input type="checkbox" data-group="path" checked /><span class="swatch" style="background:#6f6f6f"></span>Pathway, seating node, furniture</label>
+      <label><input type="checkbox" data-group="planting" checked /><span class="swatch" style="background:#2c7a3f"></span>New trees &amp; shrub beds</label>
+      <label><input type="checkbox" data-group="rain" checked /><span class="swatch" style="background:#2b6ca3"></span>Rain garden</label>
+      <label><input type="checkbox" data-group="trees" checked /><span class="swatch" style="background:#4caf50"></span>Existing trees &amp; 4 m protection zones</label>
+      <label><input type="checkbox" data-group="protection" /><span class="swatch" style="background:#ff7f00"></span>Barrier fence, mats, staging</label>
+      <label><input type="checkbox" data-group="surface" /><span class="swatch" style="background:#8d5a26"></span>Proposed surface: contours, spot levels, flow crossings</label>
+      <p style="font-size:.8rem;color:var(--muted);margin:10px 0 0">No third-party basemap: the hillshade is the proposed surface model.</p>
+    </div>
+    <div id="s3-map" role="region" aria-label="Map of the proposed landscape design"></div>
+  </div>
+
+  <h2>Drawing set</h2>
+  <div class="grid cards">{sheets.map((s) => (
+    <div class="card">
+      <a href={dl("S3_landscape_drawings_L-001_to_L-501.pdf")}><img src={`/s3/sheet_${s.id}.png`} alt={`Sheet ${s.id} ${s.title}`} width="1200" height="800" loading="lazy" style="border:1px solid var(--line);border-radius:6px" /></a>
+      <h3 style="margin-top:10px">{s.id} · {s.title}</h3>
+      <p style="margin:0;color:var(--muted);font-size:.9rem">{s.note}</p>
+    </div>))}
+  </div>
+  <p style="color:var(--muted);font-size:.9rem">ARCH D (914 × 610 mm), plans at 1:500 on the Bow Ridge CAD standard (74 layers, symbol library, title block).
+  DXF → DWG (ACAD2018) → DXF round trip through ODA File Converter on all {m.drawings.dwg_roundtrip.sheets} sheets: {m.drawings.dwg_roundtrip.audit_errors} audit errors, identical layers, blocks, entity counts and title block attributes
+  (ODA adds its own <code>VIEWPORTS</code> layer).</p>
+
+  <h2>Workflow</h2>
+  <div class="grid steps">
+    <div class="card step"><h3>Read the standards</h3>Pathway, grading, planting, tree protection and rain garden values collected with document and page before design.
+      <div class="tools">{m.criteria.cited_values} cited values · YAML</div></div>
+    <div class="card step"><h3>Site analysis &amp; layout</h3>Slope, drainage, protection zones and sight lines as hard constraints; the loop is the cheapest simple cycle in the free space.
+      <div class="tools">Python · shapely · scipy</div></div>
+    <div class="card step"><h3>Grading</h3>One linear programme over the whole path network: grade cap, fixed tie-ins, no cut under drip lines, worst grade spread evenly.
+      <div class="tools">HiGHS · rasterio</div></div>
+    <div class="card step"><h3>Planting</h3>Count from the standard, then feasibility (setbacks, soil volume, sight lines, drip lines) before any species is placed.
+      <div class="tools">{m.planting.shrub_beds_m2} m² beds · {m.planting.plugs} plugs</div></div>
+    <div class="card step"><h3>Tree protection</h3>Disturbance, limit of work, fence lines to the drip line where possible, inventory and checklist for the City's Tree Protection Plan.
+      <div class="tools">TPP Guide 2025</div></div>
+    <div class="card step"><h3>Drawings &amp; QA</h3>Six sheets from the design data, then checks re-measured from the final geometry, quantities and a DWG round trip.
+      <div class="tools">ezdxf · ODA File Converter</div></div>
+  </div>
+
+  <h2>Design QA</h2>
+  <p>{m.qa.total} checks were re-measured from the finished geometry and the proposed surface model, so a mistake in an earlier step shows up here rather than on the sheet. {m.qa.status.PASS} pass. The rest are carried openly on the drawings:</p>
+  <div class="table-scroll"><table>
+    <thead><tr><th>Item</th><th>Result</th><th>Status</th><th>Source</th></tr></thead>
+    <tbody>{openItems.map((c: { item: string; value: string; status: string; source: string; note: string }) => (
+      <tr><td>{c.item}<div style="color:var(--muted);font-size:.85rem">{c.note}</div></td><td>{c.value}</td><td><strong>{c.status}</strong></td><td>{c.source}</td></tr>))}
+    </tbody>
+  </table></div>
+  <p style="color:var(--muted);font-size:.9rem">EXCEPTION = documented deviation carried on the drawings · RFI = a question for the City · REVIEW / OPEN = to be resolved in detailing.</p>
+
+  <h2>Quantities</h2>
+  <div class="table-scroll"><table>
+    <thead><tr><th>Item</th><th style="text-align:right">Quantity</th><th>Unit</th></tr></thead>
+    <tbody>{qty.map((q: { item: string; qty: number; unit: string }) => (
+      <tr><td>{q.item}</td><td style="text-align:right">{q.qty}</td><td>{q.unit}</td></tr>))}</tbody>
+  </table></div>
+
+  <h2>What this demonstrates</h2>
+  <div class="table-scroll"><table>
+    <thead><tr><th>Employers look for</th><th>Evidence in S3</th></tr></thead>
+    <tbody>
+      <tr><td>Working to municipal standards</td><td>Every dimension traces to a clause: DGSS 2026, Access Design Standards, LID Module 2, Tree Protection Plan Guide, City Plant Lists.</td></tr>
+      <tr><td>Producing a coordinated drawing set</td><td>Six sheets from one data set - layout, grading, planting and protection agree because they are generated from the same geometry.</td></tr>
+      <tr><td>Tree protection and site constraints</td><td>{m.trees.inventory_6m}-tree inventory, {m.trees.fence_m} m of fence, {m.trees.no_dig_m} m of no-dig construction, zero removals.</td></tr>
+      <tr><td>Grading and drainage</td><td>Path profiles, cross fall, daylighting, cut / fill, rain garden sizing and overland flow crossings.</td></tr>
+      <tr><td>Accessibility</td><td>Barrier-free route identified and the two entrances that cannot meet 4 % flagged as exceptions with a reason, not hidden.</td></tr>
+      <tr><td>Checking your own work</td><td>{m.qa.total} independent checks, a QA report, quantities and a DWG round trip - all reproducible with one command.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>Limitations</h2>
+  <ul class="plain">
+    <li>Portfolio sample by a fictitious firm; not sealed, not for construction, tender or permit.</li>
+    <li>The base plan is the simulated S1 survey; underground utilities were never located and tree heights were not measured.</li>
+    <li>The design was produced by scripts written for this site: it is a defensible concept, not a substitute for a landscape architect's judgement on planting composition.</li>
+    <li>No soil or infiltration testing, no arborist assessment, no cost estimate - all flagged as RFIs on L-001.</li>
+  </ul>
+
+  <h2>Downloads</h2>
+  <ul class="plain">
+    <li><a href={dl("S3_landscape_drawings_L-001_to_L-501.pdf")}>Drawing set L-001 to L-501 (PDF)</a> ·
+      <a href={dl("S3_landscape_drawings_DWG.zip")}>DWG</a> · <a href={dl("S3_landscape_drawings_DXF.zip")}>DXF</a></li>
+    <li><a href={dl("S3_design_QA_report.md")}>Design QA report</a> · <a href={dl("S3_quantities.csv")}>Quantities (CSV)</a></li>
+    <li><a href={dl("S3_plant_schedule.csv")}>Plant schedule (CSV)</a> · <a href={dl("S3_tree_inventory_within_6m.csv")}>Tree inventory within 6 m (CSV)</a></li>
+    <li><a href={dl("S3_design_criteria_with_sources.yaml")}>Design criteria with document and page for every value (YAML)</a></li>
+  </ul>
+  </div>
+
+  <script>
+    const range = document.getElementById("compare-range") as HTMLInputElement | null;
+    const box = document.getElementById("compare");
+    const setPos = () => box && range && box.style.setProperty("--pos", `${range.value}%`);
+    range?.addEventListener("input", setPos); setPos();
+  </script>
+  <script src="../../scripts/s3-map.ts"></script>
+</Layout>

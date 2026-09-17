@@ -1,28 +1,75 @@
-﻿---
+---
 import Layout from '../layouts/Layout.astro';
-import Hero from '../components/home/Hero.astro';
-import Philosophy from '../components/home/Philosophy.astro';
-import CoreValue from '../components/home/CoreValue.astro';
-import FeaturedProjects from '../components/home/FeaturedProjects.astro';
-import HowIWork from '../components/home/HowIWork.astro';
-import CtaBanner from '../components/home/CtaBanner.astro';
-import { getCollection } from 'astro:content';
-
-const allProjects = await getCollection('projects');
-const featuredProjects = allProjects
-  .filter(p => p.data.featured)
-  .sort((a, b) => a.data.order - b.data.order)
-  .slice(0, 4);
+import { projects } from '../data/projects';
 ---
 
 <Layout
-  title="张涵 — 景观施工图设计师"
-  description="张涵，景观施工图设计师，专注将景观设计方案转化为清晰、实用、可施工的图纸解决方案，服务西南地区住宅、社区、酒店及滨水景观项目。"
+  title="Survey CAD, geomatics &amp; landscape technician portfolio"
+  description="Han Zhang — office-based survey drafting, geomatics and landscape technician portfolio, based in Alberta. Reproducible projects built from open data with documented QA."
 >
-  <Hero />
-  <Philosophy />
-  <CoreValue />
-  <FeaturedProjects projects={featuredProjects} />
-  <HowIWork />
-  <CtaBanner />
+  <section class="page-hero">
+    <div class="wrap-wide">
+      <p class="eyebrow">Alberta, Canada · open to Calgary / Edmonton and remote</p>
+      <h1>Survey drafting &amp; landscape technician portfolio</h1>
+      <p class="lede">Office-based survey and landscape work: processing field data, quality control, Canadian coordinate
+        systems, surfaces and contours, and drawings to a firm CAD standard. Each project below is reproducible from
+        open data and documented step by step, from raw shots to a finished, checked drawing set.</p>
+      <div class="btns">
+        <a class="btn primary" href="#projects">See the projects</a>
+        <a class="btn" href="/about/">About &amp; skills</a>
+        <a class="btn" href="/contact/">Contact</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="wrap-wide">
+      <div class="section-head">
+        <h2 style="margin-top:0">Why every project is built this way</h2>
+        <p>Nine years of construction-drawing production in China taught the drafting discipline; this portfolio was
+          built after relocating to Alberta to show that discipline applied to Canadian data, standards and coordinate
+          systems.</p>
+      </div>
+      <div class="grid cards">
+        <div class="card">
+          <h3>Open source first</h3>
+          <p style="margin:0;color:var(--muted);font-size:0.92rem">Every scenario runs end-to-end on open tools (QGIS, PDAL/GDAL, Python) before any commercial software is
+            touched, so the pipeline is inspectable and reproducible, not a black box.</p>
+        </div>
+        <div class="card">
+          <h3>Standards cited, not assumed</h3>
+          <p style="margin:0;color:var(--muted);font-size:0.92rem">Design values are read out of the actual municipal and provincial standards before drawing starts, each one
+            kept with its source document and page.</p>
+        </div>
+        <div class="card">
+          <h3>QA on every AI step</h3>
+          <p style="margin:0;color:var(--muted);font-size:0.92rem">AI is used to move faster, never to skip review. Every automated step has an independent check, and the
+            check results — including the mistakes — are published, not hidden.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="projects">
+    <div class="wrap-wide">
+      <div class="section-head">
+        <h2 style="margin-top:0">Projects</h2>
+        <p>Six scenarios spanning the survey and landscape technician roles this portfolio targets. Two are complete
+          with full drawing sets, interactive QA maps and downloads; the rest are in progress.</p>
+      </div>
+      <div class="grid cards">
+        {projects.map((p) => (
+          <div class="card proj-card">
+            <div class="proj-card-top">
+              <span class="proj-card-id">{p.id}</span>
+              <span class:list={['status', { planned: p.status === 'planned' }]}>{p.status === 'ready' ? 'Ready' : 'Planned'}</span>
+            </div>
+            <h3>{p.href ? <a href={p.href}>{p.title}</a> : p.title}</h3>
+            <p class="role">{p.targetRole}</p>
+            <p class="summary">{p.summary}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
 </Layout>

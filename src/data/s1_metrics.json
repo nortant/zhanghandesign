@@ -1,0 +1,89 @@
+{
+ "site": {
+  "name": "Wolfe Park",
+  "city": "Calgary, Alberta",
+  "extent_ha": 2.35
+ },
+ "field": {
+  "records": 1341,
+  "total_station": 1014,
+  "rtk": 323,
+  "seeded_errors": 24
+ },
+ "qa": {
+  "detected": 24,
+  "injected": 24,
+  "detected_without_lidar": 22,
+  "false_positives": 5,
+  "consequential": 6,
+  "by_kind": {
+   "attribute_error": {
+    "injected": 3,
+    "detected": 3
+   },
+   "code_typo": {
+    "injected": 6,
+    "detected": 6
+   },
+   "duplicate_point_number": {
+    "injected": 3,
+    "detected": 3
+   },
+   "elevation_blunder": {
+    "injected": 4,
+    "detected": 4
+   },
+   "horizontal_blunder": {
+    "injected": 2,
+    "detected": 2
+   },
+   "missing_begin": {
+    "injected": 2,
+    "detected": 2
+   },
+   "missing_end": {
+    "injected": 2,
+    "detected": 2
+   },
+   "wrong_valid_code": {
+    "injected": 2,
+    "detected": 2
+   }
+  },
+  "flagged_points": 33
+ },
+ "review": {
+  "resolved": 24,
+  "injected": 24,
+  "wrong_fixes": 0,
+  "unresolved": 0,
+  "collateral": 2
+ },
+ "linework": {
+  "figures": 86,
+  "issues": 0,
+  "mean_mm": 3.9,
+  "max_mm": 47.0
+ },
+ "dtm": {
+  "vertices": 1086,
+  "breakline_segments": 684,
+  "triangles": 2114,
+  "contours": 51,
+  "rmse_cm": 5.6,
+  "near_breaklines_with_cm": 4.5,
+  "near_breaklines_without_cm": 5.4
+ },
+ "map_center": [
+  -114.09225090553791,
+  51.02857984884673
+ ],
+ "layers": {
+  "extent": 1,
+  "field_points": 1341,
+  "qa_issues": 33,
+  "linework": 86,
+  "contours": 51,
+  "trees": 210
+ }
+}

@@ -1,0 +1,130 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import m from "../../data/s1_metrics.json";
+const kinds = Object.entries(m.qa.by_kind).map(([k, v]) => ({ name: k.replaceAll("_", " "), ...(v as { injected: number; detected: number }) }));
+const dl = (f: string) => `/s1/downloads/${f}`;
+---
+<Layout title="S1 · Topographic survey to base plan" description="Field data QA, linework, TIN and a 1:500 topographic plan, reproducible from open data.">
+  <div class="wrap">
+  <section class="hero">
+    <div>
+      <p style="margin:0;color:var(--muted);font-weight:600">Project S1 · Survey CAD / Geomatics Technician</p>
+      <h1>Topographic survey to base plan</h1>
+      <p class="lede">Wolfe Park, Calgary ({m.site.extent_ha} ha). {m.field.records.toLocaleString()} total-station and RTK shots were checked,
+      corrected with an audit trail, turned into linework and a breakline TIN, and issued as a 1:500 topographic plan (DWG / PDF).</p>
+      <div class="notice"><strong>Simulated field data.</strong> Observations were generated from NRCan LiDAR and City of Calgary open data with an
+      instrument error model, and {m.field.seeded_errors} realistic field mistakes were deliberately seeded so the office QA could be measured.</div>
+      <div class="btns">
+        <a class="btn primary" href={dl("S1_V-101_topographic_plan.pdf")}>Open drawing (PDF)</a>
+        <a class="btn" href={dl("S1_V-101_topographic_plan.dwg")}>Download DWG</a>
+        <a class="btn" href="#qa-map-section">Explore the QA map</a>
+      </div>
+    </div>
+    <a class="thumb" href={dl("S1_V-101_topographic_plan.pdf")} aria-label="Open the V-101 drawing">
+      <img src="/s1/drawing_thumbnail.png" alt="Sheet V-101 existing conditions topographic plan, ARCH D, 1:500" width="1440" height="960" loading="eager" />
+    </a>
+  </section>
+
+  <h2>Results</h2>
+  <div class="grid cards">
+    <div class="card metric"><div class="value">{m.qa.detected}/{m.qa.injected}</div><div class="label">Seeded field errors caught</div>
+      <div class="note">{m.qa.detected_without_lidar}/{m.qa.injected} using the field file alone; {m.qa.false_positives} false alarms</div></div>
+    <div class="card metric"><div class="value">{m.review.resolved}/{m.review.injected}</div><div class="label">Resolved in review</div>
+      <div class="note">{m.review.wrong_fixes} wrong fixes; {m.review.collateral} good shots dropped as a side effect</div></div>
+    <div class="card metric"><div class="value">{m.linework.mean_mm} mm</div><div class="label">Linework vs true edges</div>
+      <div class="note">mean vertex offset, max {m.linework.max_mm} mm; {m.linework.issues} linework issues</div></div>
+    <div class="card metric"><div class="value">{m.dtm.rmse_cm} cm</div><div class="label">Surface RMSE vs LiDAR</div>
+      <div class="note">near curbs {m.dtm.near_breaklines_with_cm} cm with breaklines, {m.dtm.near_breaklines_without_cm} cm without</div></div>
+  </div>
+
+  <h2>From field shots to drawing</h2>
+  <p>Drag the slider: raw coded shots on the left, the finished plan on the right (same extent).</p>
+  <div class="compare" id="compare">
+    <img src="/s1/compare_drawing.png" alt="Finished topographic plan linework, contours, trees and labels" width="1600" height="1776" loading="lazy" />
+    <img class="top" src="/s1/compare_field_points.png" alt="Raw field shots coloured by feature code" width="1600" height="1776" loading="lazy" />
+    <div class="divider"></div>
+  </div>
+  <input id="compare-range" type="range" min="0" max="100" value="50" aria-label="Reveal the finished drawing" />
+  <div class="compare-labels"><span>Field shots</span><span>Topographic plan</span></div>
+
+  <h2 id="qa-map-section">Interactive QA map</h2>
+  <p>Rings mark the {m.qa.flagged_points} shots flagged on the first QA pass: <strong style="color:var(--flag)">red</strong> = a seeded field error that was caught, <strong style="color:#d68910">orange</strong> = no seeded error (a false alarm, or a knock-on effect of a nearby error). Click a ring to see what was found and what the reviewer did.</p>
+  <div class="map-wrap">
+    <div class="card toggles" aria-label="Map layers">
+      <label><input type="checkbox" data-group="qa" checked /><span class="swatch" style="border:2px solid var(--flag)"></span>QA flags (<span style="color:var(--flag)">caught</span> / <span style="color:#d68910">false alarm</span>)</label>
+      <label><input type="checkbox" data-group="points" checked /><span class="swatch" style="background:#6b7280"></span>Field shots</label>
+      <label><input type="checkbox" data-group="linework" checked /><span class="swatch" style="background:#111"></span>Linework</label>
+      <label><input type="checkbox" data-group="contours" checked /><span class="swatch" style="background:#8d5a26"></span>Contours</label>
+      <label><input type="checkbox" data-group="trees" /><span class="swatch" style="background:#4caf50"></span>Tree canopies</label>
+      <label><input type="checkbox" data-group="hillshade" checked /><span class="swatch" style="background:#999"></span>Surface hillshade</label>
+      <p style="font-size:.8rem;color:var(--muted);margin:10px 0 0">No third-party basemap: every layer on this map comes from the project.</p>
+    </div>
+    <div id="qa-map" role="region" aria-label="Map of field shots and QA flags"></div>
+  </div>
+
+  <h2>Workflow</h2>
+  <div class="grid steps">
+    <div class="card step"><h3>Field file</h3>PNEZD with firm-neutral feature codes and line control (B / E / CLS).
+      <div class="tools">{m.field.total_station} TS + {m.field.rtk} RTK shots</div></div>
+    <div class="card step"><h3>Automated QA</h3>Codes and attributes, string logic, duplicate numbers, slope-aware elevation checks, spikes and line reversals, LiDAR comparison.
+      <div class="tools">Python · field-code library · PDAL</div></div>
+    <div class="card step"><h3>Review with audit trail</h3>Rule-based corrections, every change logged; shots with vertical blunders kept out of the surface.
+      <div class="tools">corrections log (CSV)</div></div>
+    <div class="card step"><h3>Linework</h3>Field-to-finish figures by code and string; second QA on the geometry (crossing breaklines, one-point strings).
+      <div class="tools">{m.linework.figures} figures</div></div>
+    <div class="card step"><h3>TIN &amp; contours</h3>Constrained Delaunay with breaklines; 0.25 m contours, 1 m index.
+      <div class="tools">Triangle · {m.dtm.triangles} triangles</div></div>
+    <div class="card step"><h3>Drawing</h3>Firm CAD standard layers, symbols and title block; ARCH D at 1:500; DWG, DXF, PDF.
+      <div class="tools">ezdxf · ODA File Converter</div></div>
+  </div>
+
+  <h2>What this demonstrates</h2>
+  <div class="table-scroll"><table>
+    <thead><tr><th>Employers look for</th><th>Evidence in S1</th></tr></thead>
+    <tbody>
+      <tr><td>Processing field data</td><td>Coded shots turned into linework and a surface without manual redrawing.</td></tr>
+      <tr><td>Catching field errors before they reach a drawing</td><td>{m.qa.detected} of {m.qa.injected} seeded mistakes flagged; every correction traceable to a QA finding.</td></tr>
+      <tr><td>Canadian coordinate systems</td><td>NAD83(CSRS)v7 epoch 2010, Alberta 3TM 114°W, CGVD2013; a 1.25 m offset in city open data found and calibrated.</td></tr>
+      <tr><td>Drafting to a firm standard</td><td>Layer standard, symbol library, title block and sheet layout; DWG compatible with AutoCAD.</td></tr>
+      <tr><td>Surfaces and contours</td><td>Breakline TIN checked against independent LiDAR.</td></tr>
+      <tr><td>Working efficiently and verifying automation</td><td>Scripted, repeatable pipeline; the checks were themselves scored and tuned (first version raised 96 false alarms).</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>Seeded errors by type</h2>
+  <div class="table-scroll"><table>
+    <thead><tr><th>Error type</th><th>Seeded</th><th>Caught</th></tr></thead>
+    <tbody>{kinds.map((k) => <tr><td style="text-transform:capitalize">{k.name}</td><td>{k.injected}</td><td>{k.detected}</td></tr>)}</tbody>
+  </table></div>
+
+  <h2>Coordinate system &amp; data</h2>
+  <ul class="plain">
+    <li>Horizontal: NAD83(CSRS)v7, epoch 2010, Alberta 3TM reference meridian 114° W (EPSG:22763). Vertical: CGVD2013.</li>
+    <li>Terrain: NRCan CanElevation LiDAR, Calgary 2020 (43 pts/m²), Open Government Licence – Canada.</li>
+    <li>Features: City of Calgary Open Data (curb-gutter-sidewalk, trees, lights, hydrants, signs), aligned to the LiDAR with a measured +1.00 m E / −0.75 m N correction.</li>
+  </ul>
+
+  <h2>Limitations</h2>
+  <ul class="plain">
+    <li>Field observations are simulated; this shows office processing, not Canadian field experience.</li>
+    <li>Manholes, catch basins, top of curb and gutter flow line are not shown (no open data).</li>
+    <li>LiDAR-based checks are optimistic because the simulated terrain came from the same LiDAR; the field-only result is reported separately.</li>
+    <li>Contours are unsmoothed TIN contours; a Civil 3D version of the same data is planned for comparison.</li>
+  </ul>
+
+  <h2>Downloads</h2>
+  <ul class="plain">
+    <li><a href={dl("S1_V-101_topographic_plan.pdf")}>V-101 topographic plan (PDF)</a> · <a href={dl("S1_V-101_topographic_plan.dwg")}>DWG</a> · <a href={dl("S1_V-101_topographic_plan.dxf")}>DXF</a></li>
+    <li><a href={dl("S1_field_file_PNEZD_SIMULATED.csv")}>Field file as received (PNEZD, simulated)</a></li>
+    <li><a href={dl("S1_QA_issues_first_pass.csv")}>QA findings, first pass (CSV)</a> · <a href={dl("S1_review_corrections_log.csv")}>Review corrections log (CSV)</a></li>
+  </ul>
+  </div>
+
+  <script>
+    const range = document.getElementById("compare-range") as HTMLInputElement | null;
+    const box = document.getElementById("compare");
+    const setPos = () => box && range && box.style.setProperty("--pos", `${range.value}%`);
+    range?.addEventListener("input", setPos); setPos();
+  </script>
+  <script src="../../scripts/qa-map.ts"></script>
+</Layout>

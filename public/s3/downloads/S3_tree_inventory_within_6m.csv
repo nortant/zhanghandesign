@@ -1,0 +1,62 @@
+tag,code,species,botanical,common,dbh_cm,canopy_m,condition,tpz_r_m,drip_r_m,dist_to_disturbance_m,disturbance_in_drip_m2,overhead_clearance_check,on_city_park_land,action,x,y
+T1779,TREE,ULMAME,Ulmus americana,elm,25,13.0,F,4.0,6.5,4.08,19.79,True,True,retain and protect (barrier fence); no-dig / ground protection inside drip line; field-check 3.0 m clearance; prune only with Urban Forestry authorization,-6436.07,5654729.02
+T1785,TREE,PRUCER,Prunus cerasus,cherry,4,2.0,P,4.0,4.0,3.91,0.0,False,True,retain and protect (barrier fence); poor condition: arborist assessment before works,-6488.87,5654752.35
+T1786,TREE,PRUCER,Prunus cerasus,cherry,5,2.0,G,4.0,4.0,4.01,0.0,False,True,retain and protect (barrier fence),-6488.61,5654752.53
+T1789,TREE,MALSPP,Malus,crabapple,5,1.0,F,4.0,4.0,4.0,0.0,False,True,retain and protect (barrier fence),-6531.76,5654758.12
+T1791,TREE,MALSPP,Malus,crabapple,8,5.0,F,4.0,4.0,4.0,0.0,False,True,retain and protect (barrier fence),-6459.6,5654718.7
+T1793,TREE,PRUVIR,Prunus virginiana,chokecherry,6,12.0,G,4.0,6.0,4.0,20.53,True,True,retain and protect (barrier fence); no-dig / ground protection inside drip line; field-check 3.0 m clearance; prune only with Urban Forestry authorization,-6445.49,5654723.93
+T1796,TREE,PRUVIR,Prunus virginiana,chokecherry,13,5.0,F,4.0,4.0,3.93,0.0,False,True,retain and protect (barrier fence),-6492.49,5654681.08
+T1798,TREE,PRUVIR,Prunus virginiana,chokecherry,32,9.0,F,4.0,4.5,4.0,2.18,False,True,retain and protect (barrier fence); no-dig / ground protection inside drip line,-6445.55,5654683.05
+T1799,TREE,MALSPP,Malus,crabapple,4,13.0,G,4.0,6.5,4.75,9.02,True,True,retain and protect (barrier fence); no-dig / ground protection inside drip line; field-check 3.0 m clearance; prune only with Urban Forestry authorization,-6514.95,5654736.11
+T1805,CON,PICPUN,Picea pungens,spruce,86,11.0,F,4.0,5.5,4.0,10.6,True,True,retain and protect (barrier fence); no-dig / ground protection inside drip line; field-check 3.0 m clearance; prune only with Urban Forestry authorization,-6491.01,5654667.07
+T1808,CON,PICPUN,Picea pungens,spruce,38,8.0,F,4.0,4.0,4.0,0.0,False,True,retain and protect (barrier fence),-6488.57,5654651.93
+T1809,TREE,FRAPEN,Fraxinus pennsylvanica,ash,59,13.0,F,4.0,6.5,4.0,18.87,True,True,retain and protect (barrier fence); no-dig / ground protection inside drip line; field-check 3.0 m clearance; prune only with Urban Forestry authorization,-6422.01,5654654.0
+T1812,TREE,SORAME,Sorbus americana,mountain-ash,26,6.0,F,4.0,4.0,4.23,0.0,False,True,retain and protect (barrier fence),-6431.36,5654714.72
+T1818,TREE,SYRRET,Syringa reticulata,lilac,3,9.0,F,4.0,4.5,4.49,0.0,False,True,retain and protect (barrier fence),-6433.13,5654641.1
+T1824,CON,PICGLA,Picea glauca,spruce,4,5.0,F,4.0,4.0,4.0,0.0,False,True,retain and protect (barrier fence),-6414.13,5654729.97
+T1826,TREE,FRAPEN,Fraxinus pennsylvanica,ash,31,8.0,F,4.0,4.0,3.95,0.0,True,True,retain and protect (barrier fence); field-check 3.0 m clearance; prune only with Urban Forestry authorization,-6450.73,5654696.61
+T1827,TREE,FRAPEN,Fraxinus pennsylvanica,ash,41,6.0,F,4.0,4.0,5.7,0.0,False,True,retain and protect (barrier fence),-6483.91,5654755.29
+T1830,CON,PICGLA,Picea glauca,spruce,50,6.0,F,4.0,4.0,5.72,0.0,False,True,retain and protect (barrier fence),-6464.53,5654756.61
+T1834,CON,PICGLA,Picea glauca,spruce,49,6.0,F,4.0,4.0,4.0,0.0,False,True,retain and protect (barrier fence),-6481.21,5654760.19
+T1836,TREE,SYRRET,Syringa reticulata,lilac,4,2.0,F,4.0,4.0,5.89,0.0,False,True,retain and protect (barrier fence),-6427.54,5654744.84
+T1842,TREE,ULMAME,Ulmus americana,elm,63,11.0,F,4.0,5.5,4.0,7.37,True,True,retain and protect (barrier fence); no-dig / ground protection inside drip line; field-check 3.0 m clearance; prune only with Urban Forestry authorization,-6492.13,5654644.5
+T1844,TREE,FRAPEN,Fraxinus pennsylvanica,ash,35,6.0,F,4.0,4.0,4.7,0.0,False,True,retain and protect (barrier fence),-6478.45,5654750.18
+T1845,TREE,QUEMAC,Quercus macrocarpa,oak,8,3.0,F,4.0,4.0,5.6,0.0,False,True,retain and protect (barrier fence),-6430.15,5654671.93
+T1848,TREE,ULMAME,Ulmus americana,elm,40,11.0,F,4.0,5.5,4.0,12.84,True,True,retain and protect (barrier fence); no-dig / ground protection inside drip line; field-check 3.0 m clearance; prune only with Urban Forestry authorization,-6423.58,5654731.68
+T1853,CON,PICGLA,Picea glauca,spruce,52,12.0,F,4.0,6.0,4.13,9.48,True,True,retain and protect (barrier fence); no-dig / ground protection inside drip line; field-check 3.0 m clearance; prune only with Urban Forestry authorization,-6492.08,5654743.12
+T1856,CON,PICPUN,Picea pungens,spruce,60,16.0,F,4.0,8.0,4.0,38.27,True,True,retain and protect (barrier fence); no-dig / ground protection inside drip line; field-check 3.0 m clearance; prune only with Urban Forestry authorization,-6441.41,5654689.77
+T1866,TREE,POPSPP,Populus,poplar species,75,5.0,F,4.0,4.0,4.0,0.0,False,True,retain and protect (barrier fence),-6456.99,5654651.99
+T1874,TREE,SYRSPP,Syringa,lilac shrub species,10,2.0,F,4.0,4.0,5.47,0.0,False,True,retain and protect (barrier fence),-6426.7,5654744.47
+T1876,TREE,ULMAME,Ulmus americana,elm,60,7.0,F,4.0,4.0,4.0,0.0,False,True,retain and protect (barrier fence),-6443.82,5654738.24
+T1878,TREE,FRAPEN,Fraxinus pennsylvanica,ash,47,5.0,F,4.0,4.0,4.71,0.0,False,True,retain and protect (barrier fence),-6478.46,5654753.39
+T1879,TREE,QUEMAC,Quercus macrocarpa,oak,8,7.0,F,4.0,4.0,5.08,0.0,False,True,retain and protect (barrier fence),-6431.39,5654674.98
+T1880,TREE,ULMAME,Ulmus americana,elm,47,10.0,F,4.0,5.0,4.0,3.36,True,True,retain and protect (barrier fence); no-dig / ground protection inside drip line; field-check 3.0 m clearance; prune only with Urban Forestry authorization,-6450.7,5654734.14
+T1881,TREE,FRAPEN,Fraxinus pennsylvanica,ash,49,5.0,F,4.0,4.0,4.0,0.0,False,True,retain and protect (barrier fence),-6437.21,5654661.45
+T1885,TREE,SYRRET,Syringa reticulata,lilac,4,5.0,F,4.0,4.0,5.02,0.0,False,True,retain and protect (barrier fence),-6412.22,5654728.07
+T1890,TREE,ACENEG,Acer negundo,maple,44,8.0,F,4.0,4.0,4.0,0.0,False,True,retain and protect (barrier fence),-6430.35,5654741.74
+T1891,TREE,ULMAME,Ulmus americana,elm,26,6.0,F,4.0,4.0,5.22,0.0,False,True,retain and protect (barrier fence),-6447.28,5654737.75
+T1893,CON,PICPUN,Picea pungens,spruce,29,11.0,F,4.0,5.5,4.0,13.34,True,True,retain and protect (barrier fence); no-dig / ground protection inside drip line; field-check 3.0 m clearance; prune only with Urban Forestry authorization,-6479.48,5654670.41
+T1900,TREE,SYRSPP,Syringa,lilac shrub species,10,2.0,F,4.0,4.0,4.65,0.0,False,True,retain and protect (barrier fence),-6424.89,5654743.65
+T1905,TREE,PRUMAA,Prunus maackii,cherry,19,6.0,F,4.0,4.0,4.0,0.0,False,True,retain and protect (barrier fence),-6482.89,5654675.52
+T1906,TREE,SYRSPP,Syringa,lilac shrub species,11,2.0,F,4.0,4.0,5.19,0.0,False,True,retain and protect (barrier fence),-6425.8,5654744.19
+T1915,TREE,POPSPP,Populus,poplar species,86,5.0,P,4.0,4.0,4.18,0.0,False,True,retain and protect (barrier fence); poor condition: arborist assessment before works,-6454.79,5654652.62
+T1920,CON,PICGLA,Picea glauca,spruce,55,8.0,F,4.0,4.0,4.0,0.0,False,True,retain and protect (barrier fence),-6442.77,5654709.14
+T1922,CON,PICGLA,Picea glauca,spruce,51,3.0,F,4.0,4.0,5.0,0.0,False,True,retain and protect (barrier fence),-6465.0,5654665.54
+T1923,CON,PICGLA,Picea glauca,spruce,52,8.0,F,4.0,4.0,4.0,0.0,False,True,retain and protect (barrier fence),-6464.0,5654661.08
+T1924,CON,PICGLA,Picea glauca,spruce,68,10.0,F,4.0,5.0,5.23,0.0,False,True,retain and protect (barrier fence),-6417.9,5654706.0
+T1927,TREE,POPSPP,Populus,poplar species,22,8.0,F,4.0,4.0,4.0,0.0,False,True,retain and protect (barrier fence),-6436.28,5654649.21
+T1931,TREE,SYRRET,Syringa reticulata,lilac,4,2.0,F,4.0,4.0,4.09,0.0,False,True,retain and protect (barrier fence),-6423.89,5654743.09
+T1936,TREE,LONSPP,Lonicera,honeysuckle,9,6.0,F,4.0,4.0,5.11,0.0,False,True,retain and protect (barrier fence),-6497.66,5654731.62
+T1938,TREE,FRAPEN,Fraxinus pennsylvanica,ash,29,6.0,F,4.0,4.0,4.29,0.0,False,True,retain and protect (barrier fence),-6504.68,5654722.05
+T1939,TREE,FRAPEN,Fraxinus pennsylvanica,ash,34,8.0,F,4.0,4.0,5.18,0.0,False,True,retain and protect (barrier fence),-6501.84,5654753.4
+T1943,CON,PICGLA,Picea glauca,spruce,43,8.0,F,4.0,4.0,5.37,0.0,False,True,retain and protect (barrier fence),-6500.2,5654757.26
+T1944,CON,PICGLA,Picea glauca,spruce,29,3.0,F,4.0,4.0,4.0,0.0,False,True,retain and protect (barrier fence),-6511.62,5654692.73
+T1960,CON,PICGLA,Picea glauca,spruce,45,5.0,F,4.0,4.0,4.84,0.0,False,True,retain and protect (barrier fence),-6510.62,5654694.84
+T1967,CON,PICGLA,Picea glauca,spruce,44,4.0,F,4.0,4.0,5.31,0.0,False,True,retain and protect (barrier fence),-6506.89,5654691.06
+T1969,TREE,FRAPEN,Fraxinus pennsylvanica,ash,33,6.0,F,4.0,4.0,3.91,0.0,False,True,retain and protect (barrier fence),-6505.87,5654719.15
+T1970,TREE,FRAPEN,Fraxinus pennsylvanica,ash,32,6.0,F,4.0,4.0,5.78,0.0,False,True,retain and protect (barrier fence),-6501.94,5654723.8
+T1971,TREE,FRAPEN,Fraxinus pennsylvanica,ash,26,17.0,F,4.0,8.5,4.0,49.75,True,True,retain and protect (barrier fence); no-dig / ground protection inside drip line; field-check 3.0 m clearance; prune only with Urban Forestry authorization,-6513.03,5654757.06
+T1972,TREE,FRAPEN,Fraxinus pennsylvanica,ash,39,8.0,F,4.0,4.0,4.05,0.0,False,True,retain and protect (barrier fence),-6517.3,5654766.62
+T1973,TREE,QUEMAC,Quercus macrocarpa,oak,33,7.0,F,4.0,4.0,4.0,0.0,False,True,retain and protect (barrier fence),-6497.25,5654736.22
+T1976,CON,PICGLA,Picea glauca,spruce,39,15.0,F,4.0,7.5,5.59,9.49,True,True,retain and protect (barrier fence); no-dig / ground protection inside drip line; field-check 3.0 m clearance; prune only with Urban Forestry authorization,-6520.8,5654711.71
+T1980,CON,PICGLA,Picea glauca,spruce,40,4.0,F,4.0,4.0,4.24,0.0,False,True,retain and protect (barrier fence),-6509.07,5654690.78

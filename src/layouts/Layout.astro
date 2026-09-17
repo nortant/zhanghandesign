@@ -1,5 +1,7 @@
 ---
 import '../styles/global.css';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
 
 interface Props {
   title: string;
@@ -9,54 +11,37 @@ interface Props {
 
 const {
   title,
-  description = '张涵设计 — 资深园林景观施工设计师，深耕四川、重庆地区，致力于以设计回应自然与人居的关系。',
-  image = '/og-default.jpg',
+  description = 'Han Zhang — office-based survey drafting, geomatics and landscape technician portfolio, based in Alberta, Canada.',
+  image,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="canonical" href={canonicalURL} />
 
-    <title>{title} — 张涵设计</title>
+    <title>{title} · Han Zhang</title>
     <meta name="description" content={description} />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
-    <meta property="og:title" content={`${title} — 张涵设计`} />
+    <meta property="og:title" content={`${title} · Han Zhang`} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={image} />
+    {image && <meta property="og:image" content={image} />}
 
-    <!-- Favicon placeholder -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body>
-    <slot name="header" />
+    <Header />
     <main>
       <slot />
     </main>
-    <slot name="footer" />
-
-    <script>
-      // Intersection Observer for reveal animations
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('is-visible');
-            }
-          });
-        },
-        { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
-      );
-
-      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
-    </script>
+    <Footer />
   </body>
 </html>

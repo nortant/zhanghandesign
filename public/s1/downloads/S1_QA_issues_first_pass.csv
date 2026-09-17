@@ -1,0 +1,38 @@
+P,row,check,severity,message,suggested_fix
+1083,84,string_logic,error,SW1 continues a string that was never begun,add B to this point (or to the missing first point)
+1252,253,unknown_code,error,unknown code 'LPI2',did you mean LIP?
+1260,261,line_reversal,error,LIP2 doubles back (132 deg turn); removing this point smooths the string,drop point (re-shoot)
+1269,270,string_logic,error,SW2 continues a string that was never begun,add B to this point (or to the missing first point)
+1332,333,unknown_code,error,unknown code 'LPI2',did you mean LIP?
+1562,563,line_reversal,error,SW1 doubles back (130 deg turn); removing this point smooths the string,drop point (re-shoot)
+1564,565,string_logic,error,SW2 continues a string that was never begun,add B to this point (or to the missing first point)
+1630,631,string_logic,error,SW3 continues a string that was never begun,add B to this point (or to the missing first point)
+1638,639,unknown_code,error,unknown code 'SWW3',did you mean SW?
+1784,785,vertical_internal,error,Z 1088.859 is +1.86 m off the local plane of 9 neighbours within 8 m (plane RMSE 0.02),check rod / HI height
+1795,796,attribute,error,"TREE.condition='X': not one of ['G', 'F', 'P', 'D']",
+1813,814,attribute,error,CON: 5 attribute values but only 4 defined,
+1826,827,unknown_code,error,unknown code 'TRE',did you mean TREE?
+1898,899,attribute,error,TREE.dbh_cm='9.5': invalid literal for int() with base 10: '9.5',
+1962,963,vertical_internal,error,Z 1085.311 is +0.51 m off the local plane of 17 neighbours within 8 m (plane RMSE 0.10),check rod / HI height
+1848,1004,duplicate_point_number,error,point number 1848 also used on row 849,renumber (next free number)
+2029,1030,vertical_internal,error,Z 1085.641 is +0.77 m off the local plane of 10 neighbours within 8 m (plane RMSE 0.16),check rod / HI height
+2060,1061,unknown_code,error,unknown code 'G',did you mean GS?
+2093,1094,unknown_code,error,unknown code 'G',did you mean GS?
+1684,1137,duplicate_point_number,error,point number 1684 also used on row 685,renumber (next free number)
+2256,1257,vertical_internal,error,Z 1087.283 is +1.96 m off the local plane of 5 neighbours within 8 m (plane RMSE 0.04),check rod / HI height
+1398,1312,duplicate_point_number,error,point number 1398 also used on row 399,renumber (next free number)
+1083,84,wrong_code_geometry,warning,SW1 point is the only point of its string but 0.06 m from LIP1,recode as LIP1?
+1259,260,horizontal_offline,warning,"LIP2 point 1.01 m off the line between its neighbours (spike, turn +132 deg)",check shot / prism offset
+1269,270,wrong_code_geometry,warning,SW2 point is the only point of its string but 0.00 m from LIP2,recode as LIP2?
+1288,289,horizontal_offline,warning,"LIP2 point 1.32 m off the line between its neighbours (spike, turn +37 deg)",check shot / prism offset
+1289,290,horizontal_offline,warning,"LIP2 point 3.64 m off the line between its neighbours (spike, turn -99 deg)",check shot / prism offset
+1290,291,horizontal_offline,warning,"LIP2 point 2.23 m off the line between its neighbours (spike, turn +49 deg)",check shot / prism offset
+1362,363,string_logic,warning,SW1 begins while previous string (from P1083) was never ended,add E to the previous string's last point
+1365,366,string_logic,warning,SW2 begins while previous string (from P1269) was never ended,add E to the previous string's last point
+1426,427,string_logic,warning,SW1 begins while previous string (from P1393) was never ended,add E to the previous string's last point
+1479,480,string_logic,warning,SW1 begins while previous string (from P1452) was never ended,add E to the previous string's last point
+1719,720,horizontal_offline,warning,"DW2 point 1.17 m off the line between its neighbours (spike, turn -55 deg)",check shot / prism offset
+1784,785,vertical_lidar,warning,Z 1088.859 vs LiDAR ground 1087.057 (dZ +1.80 m),check rod / HI height
+2168,1169,vertical_lidar,warning,Z 1081.094 vs LiDAR ground 1082.982 (dZ -1.89 m),check rod / HI height
+2224,1225,vertical_lidar,warning,Z 1081.771 vs LiDAR ground 1083.420 (dZ -1.65 m),check rod / HI height
+2256,1257,vertical_lidar,warning,Z 1087.283 vs LiDAR ground 1085.308 (dZ +1.97 m),check rod / HI height
