@@ -21,10 +21,10 @@ const openItems = m.qa.open_items;
 const qty = m.quantities.filter((q: { item: string }) => !q.item.startsWith("Pathway centreline"));
 ---
 <Layout title="S3 · Landscape construction drawings" description="Concept A: accessible loop path, rain garden and planting on a surveyed base plan, with tree protection, grading, plant schedule and a design QA report.">
-  <div class="wrap">
+  <div class="wrap-wide">
   <section class="hero">
     <div>
-      <p style="margin:0;color:var(--muted);font-weight:600">Project S3 · Landscape Architectural Technician</p>
+      <p class="eyebrow">Project S3 · Landscape design &amp; construction drafting</p>
       <h1>Landscape construction drawings</h1>
       <p class="lede">Wolfe Park, Calgary ({m.site.area_ha} ha, hardiness zone {m.site.hardiness_zone}). An accessible {m.path.width_m} m loop path
       ({m.path.loop_m} m plus {m.path.spurs_m} m of entrance spurs), a seating node, a rain garden and new planting, designed on the S1 survey and
@@ -38,7 +38,7 @@ const qty = m.quantities.filter((q: { item: string }) => !q.item.startsWith("Pat
       </div>
     </div>
     <a class="thumb" href={dl("S3_landscape_drawings_L-001_to_L-501.pdf")} aria-label="Open the drawing set">
-      <img src="/s3/drawing_thumbnail.png" alt="Sheet L-201 layout and materials plan, ARCH D, 1:500" width="1440" height="960" loading="eager" />
+      <img src="/s3/drawing_thumbnail.png" alt="Sheet L-201 layout and materials plan, ARCH D, 1:500" width="436" height="288" loading="eager" />
     </a>
   </section>
 
@@ -56,13 +56,15 @@ const qty = m.quantities.filter((q: { item: string }) => !q.item.startsWith("Pat
 
   <h2>Existing park and proposed design</h2>
   <p>Drag the slider: the surveyed park on the left, the proposed works on the right (same extent, same scale).</p>
-  <div class="compare" id="compare">
-    <img src="/s3/compare_proposed.png" alt="Proposed pathway, seating node, rain garden and planting" width="1600" height="1700" loading="lazy" />
-    <img class="top" src="/s3/compare_existing.png" alt="Existing park: boundary, sidewalks, surveyed trees and benches" width="1600" height="1700" loading="lazy" />
-    <div class="divider"></div>
+  <div class="compare-wrap" style="width:min(480px, 100%, calc(380px * 1600 / 1852));">
+    <div class="compare" id="compare" style="aspect-ratio:1600/1852;">
+      <img src="/s3/compare_proposed.png" alt="Proposed pathway, seating node, rain garden and planting" width="1600" height="1852" loading="lazy" />
+      <img class="top" src="/s3/compare_existing.png" alt="Existing park: boundary, sidewalks, surveyed trees and benches" width="1600" height="1852" loading="lazy" />
+      <div class="divider"></div>
+    </div>
+    <input id="compare-range" type="range" min="0" max="100" value="50" aria-label="Reveal the proposed design" />
+    <div class="compare-labels"><span>Existing (S1 survey)</span><span>Proposed (Concept A)</span></div>
   </div>
-  <input id="compare-range" type="range" min="0" max="100" value="50" aria-label="Reveal the proposed design" />
-  <div class="compare-labels"><span>Existing (S1 survey)</span><span>Proposed (Concept A)</span></div>
 
   <h2>What the standards decided</h2>
   <div class="table-scroll"><table>
@@ -89,7 +91,7 @@ const qty = m.quantities.filter((q: { item: string }) => !q.item.startsWith("Pat
   <h2>Drawing set</h2>
   <div class="grid cards">{sheets.map((s) => (
     <div class="card">
-      <a href={dl("S3_landscape_drawings_L-001_to_L-501.pdf")}><img src={`/s3/sheet_${s.id}.png`} alt={`Sheet ${s.id} ${s.title}`} width="1200" height="800" loading="lazy" style="border:1px solid var(--line);border-radius:6px" /></a>
+      <a href={dl("S3_landscape_drawings_L-001_to_L-501.pdf")}><img src={`/s3/sheet_${s.id}.png`} alt={`Sheet ${s.id} ${s.title}`} width="436" height="288" loading="lazy" style="border:1px solid var(--line);border-radius:6px" /></a>
       <h3 style="margin-top:10px">{s.id} · {s.title}</h3>
       <p style="margin:0;color:var(--muted);font-size:.9rem">{s.note}</p>
     </div>))}
@@ -131,9 +133,9 @@ const qty = m.quantities.filter((q: { item: string }) => !q.item.startsWith("Pat
       <tr><td>{q.item}</td><td style="text-align:right">{q.qty}</td><td>{q.unit}</td></tr>))}</tbody>
   </table></div>
 
-  <h2>What this demonstrates</h2>
+  <h2>What this shows</h2>
   <div class="table-scroll"><table>
-    <thead><tr><th>Employers look for</th><th>Evidence in S3</th></tr></thead>
+    <thead><tr><th>Skill</th><th>Where it shows up in S3</th></tr></thead>
     <tbody>
       <tr><td>Working to municipal standards</td><td>Every dimension traces to a clause: DGSS 2026, Access Design Standards, LID Module 2, Tree Protection Plan Guide, City Plant Lists.</td></tr>
       <tr><td>Producing a coordinated drawing set</td><td>Six sheets from one data set - layout, grading, planting and protection agree because they are generated from the same geometry.</td></tr>

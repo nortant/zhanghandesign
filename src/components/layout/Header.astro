@@ -11,10 +11,7 @@ const isActive = (href: string) => href === '/' ? pathname === '/' : pathname.st
 
 <header class="site">
   <div class="wrap-wide">
-    <a class="brand" href="/">
-      Han Zhang
-      <span class="brand-role">Survey CAD &amp; Landscape Technician · Alberta</span>
-    </a>
+    <a class="brand" href="/">Han Zhang</a>
     <nav aria-label="Main">
       {navLinks.map((link) => (
         <a href={link.href} aria-current={isActive(link.href) ? 'page' : undefined}>{link.label}</a>

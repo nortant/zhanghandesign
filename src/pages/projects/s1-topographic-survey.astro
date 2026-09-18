@@ -5,10 +5,10 @@ const kinds = Object.entries(m.qa.by_kind).map(([k, v]) => ({ name: k.replaceAll
 const dl = (f: string) => `/s1/downloads/${f}`;
 ---
 <Layout title="S1 · Topographic survey to base plan" description="Field data QA, linework, TIN and a 1:500 topographic plan, reproducible from open data.">
-  <div class="wrap">
+  <div class="wrap-wide">
   <section class="hero">
     <div>
-      <p style="margin:0;color:var(--muted);font-weight:600">Project S1 · Survey CAD / Geomatics Technician</p>
+      <p class="eyebrow">Project S1 · Survey &amp; site topography</p>
       <h1>Topographic survey to base plan</h1>
       <p class="lede">Wolfe Park, Calgary ({m.site.extent_ha} ha). {m.field.records.toLocaleString()} total-station and RTK shots were checked,
       corrected with an audit trail, turned into linework and a breakline TIN, and issued as a 1:500 topographic plan (DWG / PDF).</p>
@@ -21,7 +21,7 @@ const dl = (f: string) => `/s1/downloads/${f}`;
       </div>
     </div>
     <a class="thumb" href={dl("S1_V-101_topographic_plan.pdf")} aria-label="Open the V-101 drawing">
-      <img src="/s1/drawing_thumbnail.png" alt="Sheet V-101 existing conditions topographic plan, ARCH D, 1:500" width="1440" height="960" loading="eager" />
+      <img src="/s1/drawing_thumbnail.png" alt="Sheet V-101 existing conditions topographic plan, ARCH D, 1:500" width="801" height="528" loading="eager" />
     </a>
   </section>
 
@@ -39,13 +39,15 @@ const dl = (f: string) => `/s1/downloads/${f}`;
 
   <h2>From field shots to drawing</h2>
   <p>Drag the slider: raw coded shots on the left, the finished plan on the right (same extent).</p>
-  <div class="compare" id="compare">
-    <img src="/s1/compare_drawing.png" alt="Finished topographic plan linework, contours, trees and labels" width="1600" height="1776" loading="lazy" />
-    <img class="top" src="/s1/compare_field_points.png" alt="Raw field shots coloured by feature code" width="1600" height="1776" loading="lazy" />
-    <div class="divider"></div>
+  <div class="compare-wrap" style="width:min(480px, 100%, calc(380px * 1600 / 1776));">
+    <div class="compare" id="compare" style="aspect-ratio:1600/1776;">
+      <img src="/s1/compare_drawing.png" alt="Finished topographic plan linework, contours, trees and labels" width="1600" height="1776" loading="lazy" />
+      <img class="top" src="/s1/compare_field_points.png" alt="Raw field shots coloured by feature code" width="1600" height="1776" loading="lazy" />
+      <div class="divider"></div>
+    </div>
+    <input id="compare-range" type="range" min="0" max="100" value="50" aria-label="Reveal the finished drawing" />
+    <div class="compare-labels"><span>Field shots</span><span>Topographic plan</span></div>
   </div>
-  <input id="compare-range" type="range" min="0" max="100" value="50" aria-label="Reveal the finished drawing" />
-  <div class="compare-labels"><span>Field shots</span><span>Topographic plan</span></div>
 
   <h2 id="qa-map-section">Interactive QA map</h2>
   <p>Rings mark the {m.qa.flagged_points} shots flagged on the first QA pass: <strong style="color:var(--flag)">red</strong> = a seeded field error that was caught, <strong style="color:#d68910">orange</strong> = no seeded error (a false alarm, or a knock-on effect of a nearby error). Click a ring to see what was found and what the reviewer did.</p>
@@ -78,9 +80,9 @@ const dl = (f: string) => `/s1/downloads/${f}`;
       <div class="tools">ezdxf · ODA File Converter</div></div>
   </div>
 
-  <h2>What this demonstrates</h2>
+  <h2>What this shows</h2>
   <div class="table-scroll"><table>
-    <thead><tr><th>Employers look for</th><th>Evidence in S1</th></tr></thead>
+    <thead><tr><th>Skill</th><th>Where it shows up in S1</th></tr></thead>
     <tbody>
       <tr><td>Processing field data</td><td>Coded shots turned into linework and a surface without manual redrawing.</td></tr>
       <tr><td>Catching field errors before they reach a drawing</td><td>{m.qa.detected} of {m.qa.injected} seeded mistakes flagged; every correction traceable to a QA finding.</td></tr>

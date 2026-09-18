@@ -5,31 +5,43 @@ import { projects } from '../../data/projects';
 
 <Layout
   title="Projects"
-  description="Six survey and landscape technician scenarios: field data QA, coordinate systems, CAD standards and municipal-standard design, each reproducible from open data."
+  description="Survey, mapping and landscape projects: field data QA, coordinate systems, CAD standards and municipal-standard design, each built end to end from open data."
 >
   <section class="page-hero">
     <div class="wrap-wide">
-      <p class="eyebrow">Portfolio</p>
+      <p class="eyebrow">Work</p>
       <h1>Projects</h1>
-      <p class="lede">Every scenario is built end-to-end with open-source tools first; commercial software (Civil 3D,
-        Land F/X, Trimble Business Center) is used afterwards for side-by-side comparison versions. Field observations
-        are simulated from real open data where no live field work was possible, and labelled as such throughout.</p>
+      <p class="lede">Every piece here is built end-to-end with open-source tools first; commercial software (Civil
+        3D, Land F/X, Trimble Business Center) comes afterwards, for side-by-side comparison. Field observations are
+        simulated from real open data where no live field work was possible, and labelled as such throughout.</p>
     </div>
   </section>
 
   <section class="section">
     <div class="wrap-wide">
-      <div class="grid cards">
+      <div class="grid cards cards-projects">
         {projects.map((p) => (
-          <div class="card proj-card">
-            <div class="proj-card-top">
-              <span class="proj-card-id">{p.id}</span>
-              <span class:list={['status', { planned: p.status === 'planned' }]}>{p.status === 'ready' ? 'Ready' : 'Planned'}</span>
+          p.href ? (
+            <a class="card proj-card" href={p.href}>
+              <div class="proj-card-top">
+                <span class="proj-card-id">{p.id}</span>
+                <span class="status">Ready</span>
+              </div>
+              <h3>{p.title}</h3>
+              <p class="role">{p.focus}</p>
+              <p class="summary">{p.summary}</p>
+            </a>
+          ) : (
+            <div class="card proj-card">
+              <div class="proj-card-top">
+                <span class="proj-card-id">{p.id}</span>
+                <span class="status planned">In progress</span>
+              </div>
+              <h3>{p.title}</h3>
+              <p class="role">{p.focus}</p>
+              <p class="summary">{p.summary}</p>
             </div>
-            <h3>{p.href ? <a href={p.href}>{p.title}</a> : p.title}</h3>
-            <p class="role">{p.targetRole}</p>
-            <p class="summary">{p.summary}</p>
-          </div>
+          )
         ))}
       </div>
     </div>

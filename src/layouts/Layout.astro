@@ -11,11 +11,12 @@ interface Props {
 
 const {
   title,
-  description = 'Han Zhang — office-based survey drafting, geomatics and landscape technician portfolio, based in Alberta, Canada.',
+  description = "Han Zhang's personal site — surveying, mapping and landscape work, documented as I build it. Alberta, Canada.",
   image,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const fullTitle = title === 'Han Zhang' ? title : `${title} · Han Zhang`;
 ---
 
 <!doctype html>
@@ -25,23 +26,49 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="canonical" href={canonicalURL} />
 
-    <title>{title} · Han Zhang</title>
+    <title>{fullTitle}</title>
     <meta name="description" content={description} />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
-    <meta property="og:title" content={`${title} · Han Zhang`} />
+    <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     {image && <meta property="og:image" content={image} />}
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body>
+    <div class="site-bg" aria-hidden="true"></div>
     <Header />
     <main>
       <slot />
     </main>
     <Footer />
+
+    <script>
+      // A faint contour texture behind the whole site drifts slower than the page
+      // scrolls, for a gentle sense of depth. Skipped entirely for
+      // prefers-reduced-motion — the texture stays put, just doesn't move.
+      const bg = document.querySelector<HTMLElement>('.site-bg');
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (bg && !reduceMotion) {
+        let ticking = false;
+        const update = () => {
+          bg.style.transform = `translateY(${window.scrollY * 0.035}px)`;
+          ticking = false;
+        };
+        window.addEventListener(
+          'scroll',
+          () => {
+            if (!ticking) {
+              requestAnimationFrame(update);
+              ticking = true;
+            }
+          },
+          { passive: true }
+        );
+      }
+    </script>
   </body>
 </html>

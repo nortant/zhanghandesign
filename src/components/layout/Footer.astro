@@ -3,17 +3,29 @@ const year = new Date().getFullYear();
 ---
 
 <footer class="site">
+  <div class="footer-art" aria-hidden="true">
+    <svg class="contour-draw" viewBox="0 0 1200 180" preserveAspectRatio="none">
+      <path d="M0,24 C100,10 200,38 300,22 C400,6 500,34 600,20 C700,6 800,32 900,18 C1000,4 1100,30 1200,20"/>
+      <path d="M0,52 C120,30 220,74 320,50 C420,26 520,70 620,48 C720,26 820,68 920,46 C1020,24 1120,64 1200,50"/>
+      <path d="M0,80 C110,64 230,96 340,78 C450,60 560,94 670,76 C780,58 890,92 1000,76 C1080,64 1150,88 1200,80"/>
+      <path d="M0,108 C130,80 240,136 360,104 C480,72 590,132 700,102 C810,72 920,128 1030,100 C1110,80 1160,116 1200,108"/>
+      <path d="M0,132 C100,112 210,150 320,130 C430,110 540,148 650,128 C760,108 870,146 980,128 C1070,114 1140,140 1200,132"/>
+      <path d="M0,156 C120,144 230,168 340,154 C450,140 560,166 670,152 C780,138 890,164 1000,152 C1080,142 1150,160 1200,156"/>
+      <path d="M0,176 C150,168 250,182 400,174 C550,166 650,180 800,174 C950,168 1050,178 1200,174"/>
+    </svg>
+  </div>
+
   <div class="wrap-wide">
     <div class="footer-top">
       <div>
         <strong>Han Zhang</strong>
-        <p style="margin:4px 0 0;color:var(--muted);font-size:0.9rem">Survey CAD &amp; Landscape Technician · based in Alberta, Canada</p>
+        <p style="margin:4px 0 0;color:var(--muted);font-size:0.9rem">Surveying, landscape and mapping work, documented as I go · Alberta, Canada</p>
       </div>
       <nav class="footer-nav" aria-label="Footer">
         <a href="/projects/">Projects</a>
         <a href="/about/">About</a>
         <a href="/contact/">Contact</a>
-        <a href="mailto:hello@zhanghandesign.com">hello@zhanghandesign.com</a>
+        <a href="mailto:zerozhzh1988@gmail.com">zerozhzh1988@gmail.com</a>
       </nav>
     </div>
 
@@ -30,3 +42,33 @@ const year = new Date().getFullYear();
     </div>
   </div>
 </footer>
+
+<script>
+  // Contour lines "plot" themselves in, like a drafting instrument, the first time the
+  // footer scrolls into view. Respects prefers-reduced-motion; falls back to fully drawn.
+  const paths = document.querySelectorAll<SVGPathElement>('.contour-draw path');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  paths.forEach((p, i) => {
+    const len = p.getTotalLength();
+    p.style.strokeDasharray = String(len);
+    p.style.strokeDashoffset = reduceMotion ? '0' : String(len);
+    p.style.transition = reduceMotion ? 'none' : `stroke-dashoffset 1.3s ease ${i * 0.1}s`;
+  });
+
+  if (!reduceMotion && paths.length) {
+    const target = document.querySelector('.footer-art');
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            paths.forEach((p) => (p.style.strokeDashoffset = '0'));
+            io.disconnect();
+          }
+        }
+      },
+      { threshold: 0.1 }
+    );
+    if (target) io.observe(target);
+  }
+</script>
