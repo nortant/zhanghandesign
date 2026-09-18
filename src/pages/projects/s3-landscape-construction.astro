@@ -56,11 +56,13 @@ const qty = m.quantities.filter((q: { item: string }) => !q.item.startsWith("Pat
 
   <h2>Existing park and proposed design</h2>
   <p>Drag the slider: the surveyed park on the left, the proposed works on the right (same extent, same scale).</p>
-  <div class="compare-wrap" style="width:min(480px, 100%, calc(380px * 1600 / 1852));">
+  <div class="compare-wrap" style="width:min(760px, 100%, calc(62vh * 1600 / 1852));">
     <div class="compare" id="compare" style="aspect-ratio:1600/1852;">
-      <img src="/s3/compare_proposed.png" alt="Proposed pathway, seating node, rain garden and planting" width="1600" height="1852" loading="lazy" />
-      <img class="top" src="/s3/compare_existing.png" alt="Existing park: boundary, sidewalks, surveyed trees and benches" width="1600" height="1852" loading="lazy" />
-      <div class="divider"></div>
+      <div class="compare-inner">
+        <img src="/s3/compare_proposed.png" alt="Proposed pathway, seating node, rain garden and planting" width="1600" height="1852" loading="lazy" />
+        <img class="top" src="/s3/compare_existing.png" alt="Existing park: boundary, sidewalks, surveyed trees and benches" width="1600" height="1852" loading="lazy" />
+        <div class="divider"></div>
+      </div>
     </div>
     <input id="compare-range" type="range" min="0" max="100" value="50" aria-label="Reveal the proposed design" />
     <div class="compare-labels"><span>Existing (S1 survey)</span><span>Proposed (Concept A)</span></div>

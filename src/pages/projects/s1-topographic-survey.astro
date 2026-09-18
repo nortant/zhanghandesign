@@ -39,11 +39,13 @@ const dl = (f: string) => `/s1/downloads/${f}`;
 
   <h2>From field shots to drawing</h2>
   <p>Drag the slider: raw coded shots on the left, the finished plan on the right (same extent).</p>
-  <div class="compare-wrap" style="width:min(480px, 100%, calc(380px * 1600 / 1776));">
+  <div class="compare-wrap" style="width:min(760px, 100%, calc(62vh * 1600 / 1776));">
     <div class="compare" id="compare" style="aspect-ratio:1600/1776;">
-      <img src="/s1/compare_drawing.png" alt="Finished topographic plan linework, contours, trees and labels" width="1600" height="1776" loading="lazy" />
-      <img class="top" src="/s1/compare_field_points.png" alt="Raw field shots coloured by feature code" width="1600" height="1776" loading="lazy" />
-      <div class="divider"></div>
+      <div class="compare-inner">
+        <img src="/s1/compare_drawing.png" alt="Finished topographic plan linework, contours, trees and labels" width="1600" height="1776" loading="lazy" />
+        <img class="top" src="/s1/compare_field_points.png" alt="Raw field shots coloured by feature code" width="1600" height="1776" loading="lazy" />
+        <div class="divider"></div>
+      </div>
     </div>
     <input id="compare-range" type="range" min="0" max="100" value="50" aria-label="Reveal the finished drawing" />
     <div class="compare-labels"><span>Field shots</span><span>Topographic plan</span></div>

@@ -97,10 +97,14 @@ footer.site .footer-bottom { display: flex; justify-content: space-between; gap:
    that same width at 100%, so the slider track is always exactly as wide as the
    image and the divider it drags lines up with the thumb underneath it. */
 .compare-wrap { margin-right: auto; }
-.compare { position: relative; border: var(--border); overflow: hidden; background: var(--surface); width: 100%; }
-.compare img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.compare .top { position: absolute; inset: 0; clip-path: inset(0 calc(100% - var(--pos, 50%)) 0 0); }
-.compare .divider { position: absolute; top: 0; bottom: 0; left: var(--pos, 50%); width: 2px; background: var(--accent); pointer-events: none; }
+/* A little "mat" padding around the image, like a picture frame — some source
+   renders (S3) are cropped tight to their own content at the edges, and a bare
+   edge-to-edge fill reads as if something got cut off. */
+.compare { position: relative; border: var(--border); background: var(--surface); width: 100%; padding: 14px; }
+.compare-inner { position: relative; overflow: hidden; width: 100%; height: 100%; }
+.compare-inner img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.compare-inner .top { position: absolute; inset: 0; clip-path: inset(0 calc(100% - var(--pos, 50%)) 0 0); }
+.compare-inner .divider { position: absolute; top: 0; bottom: 0; left: var(--pos, 50%); width: 2px; background: var(--accent); pointer-events: none; }
 .compare-labels { display: flex; justify-content: space-between; width: 100%; color: var(--muted); font-size: 0.9rem; margin-top: 6px; }
 .compare-wrap input[type="range"] { width: 100%; display: block; margin-top: 10px; accent-color: var(--accent); }
 .map-wrap { display: grid; grid-template-columns: 220px 1fr; gap: 14px; }
